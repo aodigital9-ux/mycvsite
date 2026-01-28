@@ -384,14 +384,13 @@ function Footer() {
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#0a0a0a]">
-      <Navigation />
+    <Navigation />
       <Sidebar />
       <HeroIntro />
-      <IntroSection />
+      <AboutSection />
       <BentoGrid />
       <WorkSection />
       <PlaygroundSection />
-      <AboutSection />
       <Footer />
     </main>
   );
