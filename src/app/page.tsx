@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -9,10 +9,7 @@ import { motion } from "framer-motion";
 function PinkAsterisk({ className = "" }: { className?: string }) {
   return (
     <svg className={className} width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"
-        fill="#e91e63"
-      />
+      <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#e91e63"/>
     </svg>
   );
 }
@@ -45,33 +42,26 @@ function Sidebar() {
   return (
     <div className="hidden md:flex fixed right-0 top-1/2 -translate-y-1/2 z-40 flex-col">
       <button className="bg-white text-black px-3 py-4 font-bold text-sm rounded-l-lg">W.</button>
-      <button
-        className="bg-[#1a1a1a] text-white px-3 py-4 text-xs mono-label rounded-bl-lg"
-        style={{ writingMode: "vertical-rl" }}
-      >
+      <button className="bg-[#1a1a1a] text-white px-3 py-4 text-xs mono-label rounded-bl-lg" style={{ writingMode: 'vertical-rl' }}>
         Honors
       </button>
     </div>
   );
 }
 
-/**
- * NEW HERO (video 2 “second part” vibe)
- * - fullscreen background image
- * - big centered text with blur-in + stagger
- * - subtle zoom-in on background
- */
+// Hero Section
 function HeroSection() {
   const [time, setTime] = useState("");
+  const [temp] = useState("23.79");
 
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
-      const brasiliaTime = new Intl.DateTimeFormat("en-US", {
-        timeZone: "America/Sao_Paulo",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
+      const brasiliaTime = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Sao_Paulo',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
       }).format(now);
       setTime(brasiliaTime);
     };
@@ -80,14 +70,12 @@ function HeroSection() {
     return () => clearInterval(interval);
   }, []);
 
-  const bgUrl = "https://ext.same-assets.com/1891291079/3332482028.jpeg"; // demo (replace later)
-
   return (
     <section
       id="hero"
-      className="relative min-h-[100svh] w-full overflow-hidden bg-black flex items-center justify-center"
+      className="relative min-h-[100svh] w-full overflow-hidden bg-black flex items-center justify-center px-4 md:px-8 pt-24"
     >
-      {/* Background */}
+      {/* Background image layer */}
       <motion.div
         className="absolute inset-0"
         initial={{ opacity: 0, scale: 1.08 }}
@@ -95,9 +83,19 @@ function HeroSection() {
         transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="absolute inset-0">
-          <Image src={bgUrl} alt="Background" fill className="object-cover grayscale" priority />
+          <Image
+            src="https://ext.same-assets.com/1891291079/3332482028.jpeg"
+            alt="Hero background"
+            fill
+            className="object-cover grayscale"
+            priority
+          />
         </div>
+
+        {/* dark overlay */}
         <div className="absolute inset-0 bg-black/60" />
+
+        {/* soft vignette */}
         <div
           className="absolute inset-0 opacity-70"
           style={{
@@ -107,7 +105,7 @@ function HeroSection() {
         />
       </motion.div>
 
-      {/* Center text */}
+      {/* Center text (video 2 second part style) */}
       <div className="relative z-10 px-6 text-center select-none">
         <motion.div
           className="text-white/60 uppercase tracking-[0.28em] text-xs md:text-sm"
@@ -150,13 +148,13 @@ function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Bottom bar (optional info) */}
-      <div className="absolute bottom-6 left-0 right-0 z-10 px-4 md:px-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+      {/* Bottom bar (keeps your original info + scroll) */}
+      <div className="absolute bottom-6 left-0 right-0 z-10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm px-4 md:px-8">
           <div className="flex items-center gap-4">
             <span className="text-white">Based in Brasilia, Brazil</span>
             <span className="mono-label text-white/55">{time} UTC</span>
-            <span className="mono-label text-white/55">23.79°C</span>
+            <span className="mono-label text-white/55">{temp}°C</span>
           </div>
 
           <Link href="#intro" className="flex items-center gap-2 hover:text-white transition-colors">
@@ -186,7 +184,6 @@ function HeroSection() {
       </div>
     </section>
   );
-}
 
 // Intro Section
 function IntroSection() {
@@ -200,22 +197,15 @@ function IntroSection() {
       <div className="mt-12 md:mt-16 flex flex-col md:flex-row items-start justify-between gap-8">
         <div>
           <p className="text-sm text-gray-500">I've helped multiple companies</p>
-          <p className="text-sm">
-            deliver <span className="underline cursor-pointer hover:text-gray-300">high-quality design</span>.
-          </p>
+          <p className="text-sm">deliver <span className="underline cursor-pointer hover:text-gray-300">high-quality design</span>.</p>
         </div>
         <div>
           <p className="text-sm text-gray-500">Currently founding</p>
-          <p className="text-sm">
-            design at{" "}
-            <Link href="https://basistheory.com" className="underline hover:text-gray-300">
-              Basis Theory
-            </Link>
-            .
-          </p>
+          <p className="text-sm">design at <Link href="https://basistheory.com" className="underline hover:text-gray-300">Basis Theory</Link>.</p>
         </div>
       </div>
 
+      {/* Company logos */}
       <div className="mt-8 flex flex-wrap items-center gap-6 md:gap-8 opacity-50">
         <span className="text-gray-500 text-sm">creatif</span>
         <span className="text-gray-500 text-sm font-bold">GO dream</span>
@@ -231,29 +221,31 @@ function BentoGrid() {
   return (
     <section className="px-4 md:px-8 py-8 md:py-16 max-w-6xl mx-auto">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        {/* Look Around Card */}
         <div className="bg-[#1a1a1a] rounded-2xl p-6 aspect-square flex flex-col items-center justify-center hover:bg-[#222] transition-colors cursor-pointer">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-            <polygon points="5 3 19 12 5 21 5 3" />
+            <polygon points="5 3 19 12 5 21 5 3"/>
           </svg>
           <span className="mono-label text-gray-400 mt-4">LOOK</span>
           <span className="mono-label text-gray-400">AROUND</span>
         </div>
 
+        {/* K Logo Card */}
         <div className="bg-[#2a2a2a] rounded-2xl p-6 aspect-square flex items-center justify-center hover:bg-[#333] transition-colors cursor-pointer">
           <span className="text-5xl md:text-6xl font-light text-gray-400">k</span>
         </div>
 
+        {/* Number 1 Card */}
         <div className="bg-[#1f1f1f] rounded-2xl p-6 aspect-square flex items-center justify-center hover:bg-[#252525] transition-colors cursor-pointer">
           <div className="border-2 border-gray-600 rounded-lg p-3 md:p-4">
             <span className="text-3xl md:text-4xl font-light text-gray-400">1</span>
           </div>
         </div>
 
+        {/* Basis Theory Docs Card */}
         <div className="bg-white rounded-2xl p-4 md:p-6 aspect-square text-black hover:bg-gray-100 transition-colors cursor-pointer">
           <h4 className="font-semibold text-sm md:text-base">Basis Theory Docs</h4>
-          <p className="text-[10px] md:text-xs text-gray-600 mt-2">
-            Basis Theory will guide you on how to safely collect, share, process and govern your applications.
-          </p>
+          <p className="text-[10px] md:text-xs text-gray-600 mt-2">Basis Theory will guide you on how to safely collect, share, process and govern your applications.</p>
           <div className="mt-4 flex gap-2">
             <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gray-100 flex items-center justify-center border border-gray-200">
               <span className="text-[8px] md:text-xs text-gray-500">Get</span>
@@ -299,7 +291,7 @@ function WorkSection() {
       title: "Starbucks Farm",
       subtitle: "Virtual Tour",
       color: "bg-gradient-to-br from-green-600 to-green-800",
-      image: "https://ext.same-assets.com/1891291079/2669381955.webp",
+      image: "https://ext.same-assets.com/1891291079/2669381955.webp"
     },
     {
       name: "Basis Theory",
@@ -307,7 +299,7 @@ function WorkSection() {
       title: "Shaping a Tokenization",
       subtitle: "Platform for Developers",
       color: "bg-gradient-to-br from-purple-600 to-purple-900",
-      image: "https://ext.same-assets.com/1891291079/2882920354.png",
+      image: "https://ext.same-assets.com/1891291079/2882920354.png"
     },
     {
       name: "NoBolso",
@@ -315,8 +307,8 @@ function WorkSection() {
       title: "Boosting Sales",
       subtitle: "for Local Retailers",
       color: "bg-gradient-to-br from-blue-500 to-blue-700",
-      image: "https://ext.same-assets.com/1891291079/4030116513.png",
-    },
+      image: "https://ext.same-assets.com/1891291079/4030116513.png"
+    }
   ];
 
   return (
@@ -399,79 +391,6 @@ function PlaygroundSection() {
   );
 }
 
-// About Section
-function AboutSection() {
-  const experience = [
-    { period: "2021 — Now", title: "Founding Product Designer", company: "Basis Theory", link: "https://basistheory.com", remote: true },
-    { period: "2022 — Now", title: "Freelance Product Designer", company: "Toptal", link: "https://toptal.com", remote: true },
-    { period: "2020 — 2021", title: "Principal Product Designer", company: "Avenue Code", link: "#", remote: true },
-    { period: "2015 — 2020", title: "Design Lead — Design Director", company: "Zello Tech", link: "#", remote: false },
-    { period: "2013 — 2014", title: "UI/UX Designer", company: "Xys Interatividade", link: "#", remote: false },
-    { period: "2011 — 2013", title: "Front-end Developer", company: "Novacia Tech", link: "#", remote: false },
-  ];
-
-  return (
-    <section id="about" className="px-4 md:px-8 py-16 md:py-24 max-w-5xl mx-auto">
-      <div className="flex items-center gap-4 mb-8 md:mb-12">
-        <span className="text-6xl md:text-8xl font-bold text-gray-800">03</span>
-        <PinkAsterisk className="w-5 h-5 md:w-6 md:h-6" />
-      </div>
-
-      <div className="overflow-hidden py-6 md:py-8 border-y border-[#1f1f1f] mb-12 md:mb-16">
-        <div className="flex animate-marquee whitespace-nowrap">
-          {[...Array(4)].map((_, i) => (
-            <div key={i} className="flex items-center gap-4 md:gap-8 mx-4 md:mx-8">
-              <span className="text-4xl md:text-8xl font-bold text-gray-800">ABOUT</span>
-              <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
-              <span className="text-4xl md:text-8xl font-bold text-white">ME</span>
-              <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
-            </div>
-          ))}
-        </div>
-        <div className="flex flex-wrap gap-8 md:gap-48 mt-4 px-4 md:px-8">
-          <span className="mono-label text-gray-500">BASED IN BRAZIL</span>
-          <span className="mono-label text-gray-500">DETAIL-ORIENTED</span>
-          <span className="mono-label text-gray-500">CURIOUS</span>
-        </div>
-      </div>
-
-      {/* KEEP YOUR EXISTING ABOUT CONTENT BELOW (unchanged) */}
-      {/* To keep this reply short, I didn’t re-paste your entire About + Footer here. */}
-      {/* Paste your existing AboutSection + Footer code below this line exactly as it was. */}
-      <div className="text-gray-400">
-        (Your existing AboutSection content continues here — keep it as-is.)
-      </div>
-    </section>
-  );
-}
-
-// Footer (KEEP YOUR EXISTING FOOTER AS-IS)
-function Footer() {
-  return (
-    <footer className="px-4 md:px-8 py-12 md:py-16 border-t border-[#1f1f1f]">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-gray-400">(Keep your existing footer as-is.)</div>
-      </div>
-    </footer>
-  );
-}
-
-// Main Page
-export default function Home() {
-  return (
-    <main className="min-h-screen bg-[#0a0a0a]">
-      <Navigation />
-      <Sidebar />
-      <HeroSection />
-      <IntroSection />
-      <BentoGrid />
-      <WorkSection />
-      <PlaygroundSection />
-      <AboutSection />
-      <Footer />
-    </main>
-  );
-}
 // About Section
 function AboutSection() {
   const experience = [
