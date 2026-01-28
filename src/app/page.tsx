@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import HeroIntro from "@/components/HeroIntro";
+
 
 // Pink asterisk component
 function PinkAsterisk({ className = "" }: { className?: string }) {
@@ -590,7 +592,7 @@ export default function Home() {
     <main className="min-h-screen bg-[#0a0a0a]">
       <Navigation />
       <Sidebar />
-      <HeroSection />
+      <HeroIntro />
       <IntroSection />
       <BentoGrid />
       <WorkSection />
