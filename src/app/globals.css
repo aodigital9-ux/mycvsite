@@ -109,3 +109,26 @@ body {
 .img-zoom:hover {
   transform: scale(1.05);
 }
+
+
+/* ===== Section marquee (big scrolling titles) ===== */
+@keyframes sectionMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.section-marquee-track {
+  animation: sectionMarquee 18s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+}

@@ -459,21 +459,22 @@ function Footer() {
 }
 
 // Main Page
+// Main Page
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#0a0a0a]">
       <Navigation />
       <Sidebar />
 
-      {/* Hero stays */}
       <HeroIntro />
 
-      {/* FIXED ORDER (Intro -> Bento -> Work -> Playground -> About -> Footer) */}
-      <IntroSection />
+      {/* ABOUT becomes 2nd section */}
+      <AboutSection />
+
+      {/* then the rest */}
       <BentoGrid />
       <WorkSection />
       <PlaygroundSection />
-      <AboutSection />
       <Footer />
     </main>
   );
