@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import HeroIntro from "@/components/HeroIntro";
+import { motion, useReducedMotion } from "framer-motion";
 
 // Pink asterisk component
 function PinkAsterisk({ className = "" }: { className?: string }) {
@@ -52,7 +52,10 @@ function Sidebar() {
   );
 }
 
-// Marquee Title (same animation style)
+/**
+ * ✅ Animated marquee title (Framer Motion, no dependency on external CSS)
+ * This is the “exact same thing” style: edge fade + infinite loop.
+ */
 function SectionTitleMarquee({
   leftWord,
   rightWord,
@@ -62,63 +65,51 @@ function SectionTitleMarquee({
   rightWord: string;
   labels: string[];
 }) {
+  const reduce = useReducedMotion();
+
+  // If reduced motion: no marquee movement (still shows the title)
+  const marqueeAnim = reduce
+    ? {}
+    : {
+        x: ["0%", "-50%"],
+        transition: { duration: 18, ease: "linear", repeat: Infinity },
+      };
+
+  const Chunk = () => (
+    <div className="flex items-center gap-10 pr-10">
+      <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">{rightWord}</span>
+      <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
+      <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-[#121c28]">{leftWord}</span>
+      <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
+      <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">{rightWord}</span>
+      <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
+    </div>
+  );
+
   return (
     <div className="relative overflow-hidden py-8 md:py-10 border-y border-[#1f1f1f]">
       {/* Edge fade */}
       <div className="pointer-events-none absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10" />
 
-      <div className="flex whitespace-nowrap">
-        <div className="section-marquee-track flex items-center gap-10 pr-10">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="flex items-center gap-10">
-              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">
-                {rightWord}
-              </span>
-
-              <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
-
-              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-[#121c28]">
-                {leftWord}
-              </span>
-
-              <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
-
-              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">
-                {rightWord}
-              </span>
-
-              <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
-            </div>
-          ))}
-        </div>
-
-        {/* duplicate for seamless loop */}
-        <div className="section-marquee-track flex items-center gap-10 pr-10" aria-hidden="true">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="flex items-center gap-10">
-              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">
-                {rightWord}
-              </span>
-
-              <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
-
-              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-[#121c28]">
-                {leftWord}
-              </span>
-
-              <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
-
-              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">
-                {rightWord}
-              </span>
-
-              <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
-            </div>
-          ))}
-        </div>
+      {/* Track */}
+      <div className="whitespace-nowrap">
+        <motion.div className="flex w-[200%]" animate={marqueeAnim}>
+          {/* Fill enough content to avoid gaps */}
+          <div className="flex w-1/2">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <Chunk key={`a-${i}`} />
+            ))}
+          </div>
+          <div className="flex w-1/2" aria-hidden="true">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <Chunk key={`b-${i}`} />
+            ))}
+          </div>
+        </motion.div>
       </div>
 
+      {/* bottom labels row */}
       <div className="mt-4 px-4 md:px-8">
         <div className="flex flex-wrap items-center justify-between gap-6 text-xs mono-label text-gray-500">
           <span>{labels[0] ?? ""}</span>
@@ -148,6 +139,7 @@ function AboutSection() {
         <PinkAsterisk className="w-5 h-5 md:w-6 md:h-6" />
       </div>
 
+      {/* keep your ABOUT ME block unchanged */}
       <div className="overflow-hidden py-6 md:py-8 border-y border-[#1f1f1f] mb-12 md:mb-16">
         <div className="flex animate-marquee whitespace-nowrap">
           {[...Array(4)].map((_, i) => (
@@ -219,8 +211,10 @@ function AboutSection() {
   );
 }
 
-// ✅ Selected Work (new) — same visual + animation vibe
+// ✅ Selected Work (animated cards + same title marquee style)
 function SelectedWorkSection() {
+  const reduce = useReducedMotion();
+
   const projects = [
     {
       name: "Starbucks",
@@ -228,7 +222,7 @@ function SelectedWorkSection() {
       title: "Starbucks Farm",
       subtitle: "Virtual Experience",
       image: "https://ext.same-assets.com/1891291079/2669381955.webp",
-      accent: "bg-[#0f7b22]",
+      accent: "from-green-600 to-green-900",
     },
     {
       name: "Basis Theory",
@@ -236,7 +230,7 @@ function SelectedWorkSection() {
       title: "Shaping a Tokenization",
       subtitle: "Platform for Developers",
       image: "https://ext.same-assets.com/1891291079/2882920354.png",
-      accent: "bg-[#111111]",
+      accent: "from-purple-600 to-purple-950",
     },
     {
       name: "NoBolso",
@@ -244,9 +238,23 @@ function SelectedWorkSection() {
       title: "Boosting Sales",
       subtitle: "for Local Retailers",
       image: "https://ext.same-assets.com/1891291079/4030116513.png",
-      accent: "bg-[#111111]",
+      accent: "from-blue-500 to-blue-900",
     },
   ];
+
+  const container = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.08 } },
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 18 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
 
   return (
     <section id="work" className="px-4 md:px-8 py-16 md:py-24 max-w-6xl mx-auto">
@@ -257,52 +265,45 @@ function SelectedWorkSection() {
 
       <SectionTitleMarquee leftWord="SELECTED" rightWord="WORK" labels={["CASE STUDIES", "PRODUCT DESIGN", "HIGHLIGHTS"]} />
 
-      <div className="mt-10 md:mt-14 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+      <motion.div
+        className="mt-10 md:mt-14 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6"
+        variants={container}
+        initial={reduce ? "show" : "hidden"}
+        whileInView={reduce ? "show" : "show"}
+        viewport={{ once: true, amount: 0.2 }}
+      >
         {projects.map((p, i) => (
           <motion.a
             key={i}
             href="#"
-            className="group relative rounded-[28px] overflow-hidden border border-white/10 bg-[#0f0f0f]"
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: i * 0.06 }}
+            variants={item}
+            className="group block rounded-[28px] overflow-hidden border border-white/10 bg-[#0f0f0f] hover:border-white/20 transition-colors"
           >
-            {/* top bar */}
-            <div className="relative z-10 flex items-center justify-between px-5 md:px-6 py-4">
-              <div className="text-white font-medium">{p.name}</div>
-              <div className="mono-label text-white/40">{p.year}</div>
+            <div className="flex items-center justify-between px-5 md:px-6 py-4">
+              <span className="text-white font-medium">{p.name}</span>
+              <span className="mono-label text-white/40">{p.year}</span>
             </div>
 
-            {/* image */}
-            <div className={`relative mx-3 mb-3 rounded-[22px] overflow-hidden ${p.accent}`}>
+            <div className={`rounded-[22px] overflow-hidden mx-3 mb-3 bg-gradient-to-br ${p.accent}`}>
               <div className="relative h-[340px] md:h-[520px]">
                 <Image
                   src={p.image}
                   alt={p.title}
                   fill
-                  className="object-cover opacity-75 grayscale group-hover:opacity-90 transition duration-500"
+                  className="object-cover opacity-70 grayscale group-hover:opacity-90 group-hover:scale-[1.03] transition-all duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-black/0" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/0" />
                 <div className="absolute inset-0 ring-1 ring-white/10 rounded-[22px]" />
               </div>
 
-              {/* title bottom */}
               <div className="absolute left-5 right-5 bottom-6">
-                <div className="text-white text-3xl md:text-[40px] leading-[1.05] font-medium">
-                  {p.title}
-                </div>
-                <div className="text-white/85 text-2xl md:text-[34px] leading-[1.05] italic">
-                  {p.subtitle}
-                </div>
+                <div className="text-white text-3xl md:text-[40px] leading-[1.05] font-medium">{p.title}</div>
+                <div className="text-white/85 text-2xl md:text-[34px] leading-[1.05] italic">{p.subtitle}</div>
               </div>
             </div>
-
-            {/* hover lift */}
-            <div className="absolute inset-0 rounded-[28px] transition-transform duration-500 group-hover:-translate-y-1" />
           </motion.a>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
@@ -377,13 +378,13 @@ function Footer() {
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#0a0a0a]">
-      {/* marquee CSS (no extra files needed) */}
+      {/* ✅ make your ABOUT animate-marquee actually move */}
       <style jsx global>{`
-        .section-marquee-track {
-          animation: sectionMarquee 22s linear infinite;
+        .animate-marquee {
+          animation: marqueeX 16s linear infinite;
           will-change: transform;
         }
-        @keyframes sectionMarquee {
+        @keyframes marqueeX {
           from {
             transform: translate3d(0, 0, 0);
           }
@@ -392,7 +393,7 @@ export default function Home() {
           }
         }
         @media (prefers-reduced-motion: reduce) {
-          .section-marquee-track {
+          .animate-marquee {
             animation: none !important;
           }
         }
@@ -402,10 +403,9 @@ export default function Home() {
       <Sidebar />
       <HeroIntro />
 
-      {/* About stays as-is */}
       <AboutSection />
 
-      {/* ✅ Next section: Selected Work */}
+      {/* ✅ next section: Selected Work */}
       <SelectedWorkSection />
 
       <PlaygroundSection />
