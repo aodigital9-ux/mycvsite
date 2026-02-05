@@ -1,9 +1,10 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import HeroIntro from "@/components/HeroIntro";
-import { motion, useReducedMotion } from "framer-motion";
 
 // Pink asterisk component
 function PinkAsterisk({ className = "" }: { className?: string }) {
@@ -52,10 +53,87 @@ function Sidebar() {
   );
 }
 
-/**
- * ✅ Animated marquee title (Framer Motion, no dependency on external CSS)
- * This is the “exact same thing” style: edge fade + infinite loop.
- */
+// Intro Section (keep if you want later, currently not rendered in Home)
+function IntroSection() {
+  return (
+    <section id="intro" className="px-4 md:px-8 py-16 md:py-24 max-w-4xl mx-auto">
+      <h2 className="text-3xl md:text-5xl font-light text-gray-400 leading-relaxed">
+        Brazilian <span className="text-white">Product Designer</span> dedicated to the craft of creating{" "}
+        <span className="text-white">0→1 experiences</span> till the last detail.
+      </h2>
+
+      <div className="mt-12 md:mt-16 flex flex-col md:flex-row items-start justify-between gap-8">
+        <div>
+          <p className="text-sm text-gray-500">I've helped multiple companies</p>
+          <p className="text-sm">
+            deliver <span className="underline cursor-pointer hover:text-gray-300">high-quality design</span>.
+          </p>
+        </div>
+        <div>
+          <p className="text-sm text-gray-500">Currently founding</p>
+          <p className="text-sm">
+            design at{" "}
+            <Link href="https://basistheory.com" className="underline hover:text-gray-300">
+              Basis Theory
+            </Link>
+            .
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-8 flex flex-wrap items-center gap-6 md:gap-8 opacity-50">
+        <span className="text-gray-500 text-sm">creatif</span>
+        <span className="text-gray-500 text-sm font-bold">GO dream</span>
+        <span className="text-gray-500 text-sm">avenue</span>
+        <span className="text-gray-500 text-sm">kapa</span>
+      </div>
+    </section>
+  );
+}
+
+// Bento Grid Section
+function BentoGrid() {
+  return (
+    <section className="px-4 md:px-8 py-8 md:py-16 max-w-6xl mx-auto">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        <div className="bg-[#1a1a1a] rounded-2xl p-6 aspect-square flex flex-col items-center justify-center hover:bg-[#222] transition-colors cursor-pointer">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+          <span className="mono-label text-gray-400 mt-4">LOOK</span>
+          <span className="mono-label text-gray-400">AROUND</span>
+        </div>
+
+        <div className="bg-[#2a2a2a] rounded-2xl p-6 aspect-square flex items-center justify-center hover:bg-[#333] transition-colors cursor-pointer">
+          <span className="text-5xl md:text-6xl font-light text-gray-400">k</span>
+        </div>
+
+        <div className="bg-[#1f1f1f] rounded-2xl p-6 aspect-square flex items-center justify-center hover:bg-[#252525] transition-colors cursor-pointer">
+          <div className="border-2 border-gray-600 rounded-lg p-3 md:p-4">
+            <span className="text-3xl md:text-4xl font-light text-gray-400">1</span>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-2xl p-4 md:p-6 aspect-square text-black hover:bg-gray-100 transition-colors cursor-pointer">
+          <h4 className="font-semibold text-sm md:text-base">Basis Theory Docs</h4>
+          <p className="text-[10px] md:text-xs text-gray-600 mt-2">
+            Basis Theory will guide you on how to safely collect, share, process and govern your applications.
+          </p>
+          <div className="mt-4 flex gap-2">
+            <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gray-100 flex items-center justify-center border border-gray-200">
+              <span className="text-[8px] md:text-xs text-gray-500">Get</span>
+            </div>
+            <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gray-100 flex items-center justify-center border border-gray-200">
+              <span className="text-[8px] md:text-xs text-gray-500">Col</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Title marquee (CSS animation only = no TS “ease string” issues)
 function SectionTitleMarquee({
   leftWord,
   rightWord,
@@ -65,51 +143,39 @@ function SectionTitleMarquee({
   rightWord: string;
   labels: string[];
 }) {
-  const reduce = useReducedMotion();
-
-  // If reduced motion: no marquee movement (still shows the title)
-  const marqueeAnim = reduce
-    ? {}
-    : {
-        x: ["0%", "-50%"],
-        transition: { duration: 18, ease: "linear", repeat: Infinity },
-      };
-
-  const Chunk = () => (
-    <div className="flex items-center gap-10 pr-10">
-      <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">{rightWord}</span>
-      <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
-      <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-[#121c28]">{leftWord}</span>
-      <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
-      <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">{rightWord}</span>
-      <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
-    </div>
-  );
-
   return (
     <div className="relative overflow-hidden py-8 md:py-10 border-y border-[#1f1f1f]">
-      {/* Edge fade */}
       <div className="pointer-events-none absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10" />
 
-      {/* Track */}
-      <div className="whitespace-nowrap">
-        <motion.div className="flex w-[200%]" animate={marqueeAnim}>
-          {/* Fill enough content to avoid gaps */}
-          <div className="flex w-1/2">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <Chunk key={`a-${i}`} />
-            ))}
-          </div>
-          <div className="flex w-1/2" aria-hidden="true">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <Chunk key={`b-${i}`} />
-            ))}
-          </div>
-        </motion.div>
+      <div className="flex whitespace-nowrap">
+        <div className="section-marquee-track flex items-center gap-10 pr-10">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="flex items-center gap-10">
+              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">{rightWord}</span>
+              <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
+              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-[#121c28]">{leftWord}</span>
+              <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
+              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">{rightWord}</span>
+              <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
+            </div>
+          ))}
+        </div>
+
+        <div className="section-marquee-track flex items-center gap-10 pr-10" aria-hidden="true">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="flex items-center gap-10">
+              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">{rightWord}</span>
+              <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
+              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-[#121c28]">{leftWord}</span>
+              <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
+              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">{rightWord}</span>
+              <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* bottom labels row */}
       <div className="mt-4 px-4 md:px-8">
         <div className="flex flex-wrap items-center justify-between gap-6 text-xs mono-label text-gray-500">
           <span>{labels[0] ?? ""}</span>
@@ -121,7 +187,235 @@ function SectionTitleMarquee({
   );
 }
 
-// About Section (your current)
+/**
+ * Animated Work Card (hover like the video)
+ * - lifts + slight tilt to cursor
+ * - image zoom
+ * - soft shine sweep
+ * - border glow
+ */
+function WorkCard({
+  name,
+  year,
+  title,
+  subtitle,
+  image,
+  href = "#",
+}: {
+  name: string;
+  year: string;
+  title: string;
+  subtitle: string;
+  image: string;
+  href?: string;
+}) {
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+
+  // smooth cursor tracking
+  const sx = useSpring(mx, { stiffness: 150, damping: 20, mass: 0.2 });
+  const sy = useSpring(my, { stiffness: 150, damping: 20, mass: 0.2 });
+
+  // rotate based on cursor position
+  const rotateY = useTransform(sx, [-0.5, 0.5], [-6, 6]);
+  const rotateX = useTransform(sy, [-0.5, 0.5], [6, -6]);
+
+  // shine position
+  const shineX = useTransform(sx, [-0.5, 0.5], ["20%", "80%"]);
+  const shineY = useTransform(sy, [-0.5, 0.5], ["20%", "80%"]);
+
+  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5; // -0.5..0.5
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    mx.set(px);
+    my.set(py);
+  };
+
+  const handleLeave = () => {
+    mx.set(0);
+    my.set(0);
+  };
+
+  return (
+    <Link href={href} className="block">
+      <motion.div
+        onMouseMove={handleMove}
+        onMouseLeave={handleLeave}
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        whileHover={{ y: -10 }}
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        className="relative rounded-2xl overflow-hidden bg-[#141414] border border-white/5 shadow-[0_30px_80px_rgba(0,0,0,0.55)]"
+      >
+        {/* glow border on hover */}
+        <motion.div
+          className="pointer-events-none absolute inset-0 rounded-2xl"
+          initial={{ opacity: 0 }}
+          whileHover={{ opacity: 1 }}
+          transition={{ duration: 0.25 }}
+          style={{
+            boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.12), 0 0 60px rgba(233,30,99,0.08)",
+          }}
+        />
+
+        {/* top bar */}
+        <div className="relative z-10 flex items-center justify-between px-5 md:px-6 py-4 bg-black/25 backdrop-blur-sm">
+          <span className="text-white font-medium">{name}</span>
+          <span className="mono-label text-white/60">{year}</span>
+        </div>
+
+        {/* media */}
+        <div className="relative h-56 md:h-96 overflow-hidden">
+          <motion.div
+            className="absolute inset-0"
+            initial={{ scale: 1 }}
+            whileHover={{ scale: 1.06 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <Image src={image} alt={title} fill className="object-cover opacity-60" />
+          </motion.div>
+
+          {/* dark fade */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+          {/* shine sweep */}
+          <motion.div
+            className="pointer-events-none absolute inset-0"
+            initial={{ opacity: 0 }}
+            whileHover={{ opacity: 1 }}
+            transition={{ duration: 0.2 }}
+            style={{
+              background:
+                "radial-gradient(200px 160px at var(--sx) var(--sy), rgba(255,255,255,0.16), rgba(255,255,255,0) 60%)",
+              // @ts-ignore CSS vars
+              ["--sx" as any]: shineX,
+              // @ts-ignore CSS vars
+              ["--sy" as any]: shineY,
+              mixBlendMode: "screen",
+            }}
+          />
+
+          {/* bottom text */}
+          <div className="absolute bottom-6 md:bottom-8 left-5 md:left-8 right-5 md:right-8">
+            <motion.h3
+              className="text-2xl md:text-4xl font-semibold text-white"
+              initial={{ y: 10, opacity: 0.9 }}
+              whileHover={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.25 }}
+            >
+              {title}
+            </motion.h3>
+            <motion.p
+              className="text-xl md:text-3xl italic text-white/80"
+              initial={{ y: 12, opacity: 0.85 }}
+              whileHover={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.28 }}
+            >
+              {subtitle}
+            </motion.p>
+          </div>
+        </div>
+      </motion.div>
+    </Link>
+  );
+}
+
+// Work Section - Case Studies
+function WorkSection() {
+  const projects = useMemo(
+    () => [
+      {
+        name: "Starbucks",
+        year: "2021",
+        title: "Starbucks Farm",
+        subtitle: "Virtual Tour",
+        image: "https://ext.same-assets.com/1891291079/2669381955.webp",
+      },
+      {
+        name: "Basis Theory",
+        year: "2023",
+        title: "Shaping a Tokenization",
+        subtitle: "Platform for Developers",
+        image: "https://ext.same-assets.com/1891291079/2882920354.png",
+      },
+      {
+        name: "NoBolso",
+        year: "2020",
+        title: "Boosting Sales",
+        subtitle: "for Local Retailers",
+        image: "https://ext.same-assets.com/1891291079/4030116513.png",
+      },
+    ],
+    []
+  );
+
+  return (
+    <section id="work" className="px-4 md:px-8 py-16 md:py-24 max-w-6xl mx-auto">
+      <div className="flex items-center gap-4 mb-8 md:mb-12">
+        <span className="text-6xl md:text-8xl font-bold text-gray-800">01</span>
+        <PinkAsterisk className="w-5 h-5 md:w-6 md:h-6" />
+      </div>
+
+      <SectionTitleMarquee leftWord="WORK" rightWord="WORK" labels={["CASE STUDIES", "PRODUCT DESIGN", "HIGHLIGHTS"]} />
+
+      <div className="mt-10 md:mt-14 grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+        {projects.map((p, idx) => (
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.55, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <WorkCard {...p} />
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// Playground Section
+function PlaygroundSection() {
+  const projects = [
+    { name: "Kapa.ai", type: "WEBDESIGN", image: "https://ext.same-assets.com/1891291079/3915969036.png" },
+    { name: "Event Ticketing App", type: "WEB APP", image: "https://ext.same-assets.com/1891291079/559246829.webp" },
+    { name: "SendSecure.ly", type: "WEB APP", image: "https://ext.same-assets.com/1891291079/1057073512.webp" },
+    { name: "Mobile Banking Suite", type: "MOBILE", image: "https://ext.same-assets.com/1891291079/4030116513.png" },
+    { name: "Rio's Botanical Garden", type: "MOBILE", image: "https://ext.same-assets.com/1891291079/3139325625.jpeg" },
+    { name: "Shopping App Concept", type: "MOBILE", image: "https://ext.same-assets.com/1891291079/2259630177.png" },
+  ];
+
+  return (
+    <section id="playground" className="px-4 md:px-8 py-16 md:py-24 max-w-6xl mx-auto">
+      <div className="flex items-center gap-4 mb-8 md:mb-12">
+        <span className="text-6xl md:text-8xl font-bold text-gray-800">02</span>
+        <PinkAsterisk className="w-5 h-5 md:w-6 md:h-6" />
+      </div>
+
+      <SectionTitleMarquee leftWord="PLAYGROUND" rightWord="PLAYGROUND" labels={["OTHER PROJECTS", "EXPERIMENTS", "UI STUDIES"]} />
+
+      <div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        {projects.map((project, index) => (
+          <div key={index} className="bg-[#141414] rounded-2xl overflow-hidden project-card cursor-pointer group">
+            <div className="relative h-40 md:h-48 overflow-hidden">
+              <Image src={project.image} alt={project.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div className="p-4 flex items-center justify-between">
+              <span className="text-sm font-medium">{project.name}</span>
+              <span className="mono-label text-gray-500">{project.type}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// About Section (unchanged header block from your current)
 function AboutSection() {
   const experience = [
     { period: "2021 — Now", title: "Founding Product Designer", company: "Basis Theory", link: "https://basistheory.com", remote: true },
@@ -133,13 +427,12 @@ function AboutSection() {
   ];
 
   return (
-    <section id="about" className="px-4 md:px-8 py-16 md:py-24 max-w-5xl mx-auto">
+    <section id="about" className="px-4 md:px-8 py-16 md:py-24 max-w-6xl mx-auto">
       <div className="flex items-center gap-4 mb-8 md:mb-12">
         <span className="text-6xl md:text-8xl font-bold text-gray-800">03</span>
         <PinkAsterisk className="w-5 h-5 md:w-6 md:h-6" />
       </div>
 
-      {/* keep your ABOUT ME block unchanged */}
       <div className="overflow-hidden py-6 md:py-8 border-y border-[#1f1f1f] mb-12 md:mb-16">
         <div className="flex animate-marquee whitespace-nowrap">
           {[...Array(4)].map((_, i) => (
@@ -211,145 +504,11 @@ function AboutSection() {
   );
 }
 
-// ✅ Selected Work (animated cards + same title marquee style)
-function SelectedWorkSection() {
-  const reduce = useReducedMotion();
-
-  const projects = [
-    {
-      name: "Starbucks",
-      year: "2021",
-      title: "Starbucks Farm",
-      subtitle: "Virtual Experience",
-      image: "https://ext.same-assets.com/1891291079/2669381955.webp",
-      accent: "from-green-600 to-green-900",
-    },
-    {
-      name: "Basis Theory",
-      year: "2023",
-      title: "Shaping a Tokenization",
-      subtitle: "Platform for Developers",
-      image: "https://ext.same-assets.com/1891291079/2882920354.png",
-      accent: "from-purple-600 to-purple-950",
-    },
-    {
-      name: "NoBolso",
-      year: "2020",
-      title: "Boosting Sales",
-      subtitle: "for Local Retailers",
-      image: "https://ext.same-assets.com/1891291079/4030116513.png",
-      accent: "from-blue-500 to-blue-900",
-    },
-  ];
-
-  const container = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.08 } },
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 18 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] },
-    },
-  };
-
-  return (
-    <section id="work" className="px-4 md:px-8 py-16 md:py-24 max-w-6xl mx-auto">
-      <div className="flex items-center gap-4 mb-8 md:mb-12">
-        <span className="text-6xl md:text-8xl font-bold text-gray-800">01</span>
-        <PinkAsterisk className="w-5 h-5 md:w-6 md:h-6" />
-      </div>
-
-      <SectionTitleMarquee leftWord="SELECTED" rightWord="WORK" labels={["CASE STUDIES", "PRODUCT DESIGN", "HIGHLIGHTS"]} />
-
-      <motion.div
-        className="mt-10 md:mt-14 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6"
-        variants={container}
-        initial={reduce ? "show" : "hidden"}
-        whileInView={reduce ? "show" : "show"}
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        {projects.map((p, i) => (
-          <motion.a
-            key={i}
-            href="#"
-            variants={item}
-            className="group block rounded-[28px] overflow-hidden border border-white/10 bg-[#0f0f0f] hover:border-white/20 transition-colors"
-          >
-            <div className="flex items-center justify-between px-5 md:px-6 py-4">
-              <span className="text-white font-medium">{p.name}</span>
-              <span className="mono-label text-white/40">{p.year}</span>
-            </div>
-
-            <div className={`rounded-[22px] overflow-hidden mx-3 mb-3 bg-gradient-to-br ${p.accent}`}>
-              <div className="relative h-[340px] md:h-[520px]">
-                <Image
-                  src={p.image}
-                  alt={p.title}
-                  fill
-                  className="object-cover opacity-70 grayscale group-hover:opacity-90 group-hover:scale-[1.03] transition-all duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/0" />
-                <div className="absolute inset-0 ring-1 ring-white/10 rounded-[22px]" />
-              </div>
-
-              <div className="absolute left-5 right-5 bottom-6">
-                <div className="text-white text-3xl md:text-[40px] leading-[1.05] font-medium">{p.title}</div>
-                <div className="text-white/85 text-2xl md:text-[34px] leading-[1.05] italic">{p.subtitle}</div>
-              </div>
-            </div>
-          </motion.a>
-        ))}
-      </motion.div>
-    </section>
-  );
-}
-
-// Playground Section (your current)
-function PlaygroundSection() {
-  const projects = [
-    { name: "Kapa.ai", type: "WEBDESIGN", image: "https://ext.same-assets.com/1891291079/3915969036.png" },
-    { name: "Event Ticketing App", type: "WEB APP", image: "https://ext.same-assets.com/1891291079/559246829.webp" },
-    { name: "SendSecure.ly", type: "WEB APP", image: "https://ext.same-assets.com/1891291079/1057073512.webp" },
-    { name: "Mobile Banking Suite", type: "MOBILE", image: "https://ext.same-assets.com/1891291079/4030116513.png" },
-    { name: "Rio's Botanical Garden", type: "MOBILE", image: "https://ext.same-assets.com/1891291079/3139325625.jpeg" },
-    { name: "Shopping App Concept", type: "MOBILE", image: "https://ext.same-assets.com/1891291079/2259630177.png" },
-  ];
-
-  return (
-    <section id="playground" className="px-4 md:px-8 py-16 md:py-24 max-w-5xl mx-auto">
-      <div className="flex items-center gap-4 mb-8 md:mb-12">
-        <span className="text-6xl md:text-8xl font-bold text-gray-800">02</span>
-        <PinkAsterisk className="w-5 h-5 md:w-6 md:h-6" />
-      </div>
-
-      <SectionTitleMarquee leftWord="PLAYGROUND" rightWord="PLAYGROUND" labels={["OTHER PROJECTS", "EXPERIMENTS", "UI STUDIES"]} />
-
-      <div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-        {projects.map((project, index) => (
-          <div key={index} className="bg-[#141414] rounded-2xl overflow-hidden project-card cursor-pointer group">
-            <div className="relative h-40 md:h-48 overflow-hidden">
-              <Image src={project.image} alt={project.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-            </div>
-            <div className="p-4 flex items-center justify-between">
-              <span className="text-sm font-medium">{project.name}</span>
-              <span className="mono-label text-gray-500">{project.type}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 // Footer
 function Footer() {
   return (
     <footer className="px-4 md:px-8 py-12 md:py-16 border-t border-[#1f1f1f]">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-12 md:mb-16">
           <Link href="/" className="flex items-center gap-1">
             <span className="text-xl md:text-2xl font-bold tracking-tight">RAD</span>
@@ -376,38 +535,15 @@ function Footer() {
 
 // Main Page
 export default function Home() {
+  // keeping your current order: hero -> about -> bento -> work -> playground
   return (
     <main className="min-h-screen bg-[#0a0a0a]">
-      {/* ✅ make your ABOUT animate-marquee actually move */}
-      <style jsx global>{`
-        .animate-marquee {
-          animation: marqueeX 16s linear infinite;
-          will-change: transform;
-        }
-        @keyframes marqueeX {
-          from {
-            transform: translate3d(0, 0, 0);
-          }
-          to {
-            transform: translate3d(-50%, 0, 0);
-          }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .animate-marquee {
-            animation: none !important;
-          }
-        }
-      `}</style>
-
       <Navigation />
       <Sidebar />
       <HeroIntro />
-
       <AboutSection />
-
-      {/* ✅ next section: Selected Work */}
-      <SelectedWorkSection />
-
+      <BentoGrid />
+      <WorkSection />
       <PlaygroundSection />
       <Footer />
     </main>
