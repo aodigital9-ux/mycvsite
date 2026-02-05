@@ -39,7 +39,7 @@ export default function HeroIntro() {
       >
         <div className="absolute inset-0">
           <Image
-            src="https://ext.same-assets.com/1891291079/3332482028.jpeg"
+            src="/images/hero-bg.jpg"
             alt="Hero background"
             fill
             className="object-cover grayscale"
