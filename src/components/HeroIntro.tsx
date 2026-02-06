@@ -34,7 +34,7 @@ export default function HeroIntro() {
       {/* Background image */}
       <motion.div
         className="absolute inset-0"
-        initial={{ opacity: 0, scale: 1.08 }}
+        initial={{ opacity: 0, scale: 1.06 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1] }}
       >
@@ -44,15 +44,15 @@ export default function HeroIntro() {
             alt="Hero background"
             fill
             priority
-            className="object-cover object-center grayscale"
             sizes="100vw"
+            className="object-cover object-center grayscale"
           />
         </div>
 
-        {/* Dark overlay */}
+        {/* dark overlay */}
         <div className="absolute inset-0 bg-black/60" />
 
-        {/* Soft center glow */}
+        {/* soft center glow */}
         <div
           className="absolute inset-0 opacity-70"
           style={{
@@ -80,7 +80,7 @@ export default function HeroIntro() {
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ delay: 0.28, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >
-          RADILSON
+          OTMANE
         </motion.div>
 
         <motion.div
@@ -90,7 +90,7 @@ export default function HeroIntro() {
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ delay: 0.38, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >
-          GOMES
+          JOUAL
         </motion.div>
 
         <motion.div
@@ -114,7 +114,10 @@ export default function HeroIntro() {
             <span className="mono-label text-white/55">{temp}°C</span>
           </div>
 
-          <Link href="#intro" className="flex items-center gap-2 hover:text-white transition-colors">
+          <Link
+            href="#intro"
+            className="flex items-center gap-2 hover:text-white transition-colors"
+          >
             <span className="mono-label text-white/55">SCROLL</span>
             <motion.svg
               width="16"
@@ -124,14 +127,20 @@ export default function HeroIntro() {
               stroke="currentColor"
               className="text-white/60"
               animate={{ y: [0, 6, 0] }}
-              transition={{ duration: 1.2, repeat: Infinity, ease: [0.42, 0, 0.58, 1] }}
+              transition={{
+                duration: 1.2,
+                repeat: Infinity,
+                ease: [0.42, 0, 0.58, 1],
+              }}
             >
               <path d="M12 5v14M5 12l7 7 7-7" strokeWidth="2" />
             </motion.svg>
           </Link>
 
           <div className="flex items-center gap-2">
-            <span className="mono-label text-white/55 hidden md:inline">Freelance Availability</span>
+            <span className="mono-label text-white/55 hidden md:inline">
+              Freelance Availability
+            </span>
             <span className="flex items-center gap-1">
               <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
               <span className="mono-label text-white">LIMITED HOURS</span>
