@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import HeroIntro from "@/components/HeroIntro";
+import IntroSection from "@/components/IntroSection";
 
 // Pink asterisk component
 function PinkAsterisk({ className = "" }: { className?: string }) {
@@ -541,6 +542,7 @@ export default function Home() {
       <Navigation />
       <Sidebar />
       <HeroIntro />
+      <IntroSection />
       <AboutSection />
       <BentoGrid />
       <WorkSection />
