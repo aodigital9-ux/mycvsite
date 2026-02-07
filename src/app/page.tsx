@@ -1,11 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import HeroIntro from "@/components/HeroIntro";
-import IntroSection from "@/components/IntroSection";
 
 // Pink asterisk component
 function PinkAsterisk({ className = "" }: { className?: string }) {
@@ -54,44 +53,6 @@ function Sidebar() {
   );
 }
 
-// Intro Section (keep if you want later, currently not rendered in Home)
-function IntroSection() {
-  return (
-    <section id="intro" className="px-4 md:px-8 py-16 md:py-24 max-w-4xl mx-auto">
-      <h2 className="text-3xl md:text-5xl font-light text-gray-400 leading-relaxed">
-        Brazilian <span className="text-white">Product Designer</span> dedicated to the craft of creating{" "}
-        <span className="text-white">0→1 experiences</span> till the last detail.
-      </h2>
-
-      <div className="mt-12 md:mt-16 flex flex-col md:flex-row items-start justify-between gap-8">
-        <div>
-          <p className="text-sm text-gray-500">I've helped multiple companies</p>
-          <p className="text-sm">
-            deliver <span className="underline cursor-pointer hover:text-gray-300">high-quality design</span>.
-          </p>
-        </div>
-        <div>
-          <p className="text-sm text-gray-500">Currently founding</p>
-          <p className="text-sm">
-            design at{" "}
-            <Link href="https://basistheory.com" className="underline hover:text-gray-300">
-              Basis Theory
-            </Link>
-            .
-          </p>
-        </div>
-      </div>
-
-      <div className="mt-8 flex flex-wrap items-center gap-6 md:gap-8 opacity-50">
-        <span className="text-gray-500 text-sm">creatif</span>
-        <span className="text-gray-500 text-sm font-bold">GO dream</span>
-        <span className="text-gray-500 text-sm">avenue</span>
-        <span className="text-gray-500 text-sm">kapa</span>
-      </div>
-    </section>
-  );
-}
-
 // Bento Grid Section
 function BentoGrid() {
   return (
@@ -134,7 +95,7 @@ function BentoGrid() {
   );
 }
 
-// Title marquee (CSS animation only = no TS “ease string” issues)
+// Title marquee (CSS animation only)
 function SectionTitleMarquee({
   leftWord,
   rightWord,
@@ -188,13 +149,7 @@ function SectionTitleMarquee({
   );
 }
 
-/**
- * Animated Work Card (hover like the video)
- * - lifts + slight tilt to cursor
- * - image zoom
- * - soft shine sweep
- * - border glow
- */
+// Animated Work Card
 function WorkCard({
   name,
   year,
@@ -213,21 +168,18 @@ function WorkCard({
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
 
-  // smooth cursor tracking
   const sx = useSpring(mx, { stiffness: 150, damping: 20, mass: 0.2 });
   const sy = useSpring(my, { stiffness: 150, damping: 20, mass: 0.2 });
 
-  // rotate based on cursor position
   const rotateY = useTransform(sx, [-0.5, 0.5], [-6, 6]);
   const rotateX = useTransform(sy, [-0.5, 0.5], [6, -6]);
 
-  // shine position
   const shineX = useTransform(sx, [-0.5, 0.5], ["20%", "80%"]);
   const shineY = useTransform(sy, [-0.5, 0.5], ["20%", "80%"]);
 
   const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
-    const px = (e.clientX - r.left) / r.width - 0.5; // -0.5..0.5
+    const px = (e.clientX - r.left) / r.width - 0.5;
     const py = (e.clientY - r.top) / r.height - 0.5;
     mx.set(px);
     my.set(py);
@@ -251,7 +203,6 @@ function WorkCard({
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         className="relative rounded-2xl overflow-hidden bg-[#141414] border border-white/5 shadow-[0_30px_80px_rgba(0,0,0,0.55)]"
       >
-        {/* glow border on hover */}
         <motion.div
           className="pointer-events-none absolute inset-0 rounded-2xl"
           initial={{ opacity: 0 }}
@@ -262,13 +213,11 @@ function WorkCard({
           }}
         />
 
-        {/* top bar */}
         <div className="relative z-10 flex items-center justify-between px-5 md:px-6 py-4 bg-black/25 backdrop-blur-sm">
           <span className="text-white font-medium">{name}</span>
           <span className="mono-label text-white/60">{year}</span>
         </div>
 
-        {/* media */}
         <div className="relative h-56 md:h-96 overflow-hidden">
           <motion.div
             className="absolute inset-0"
@@ -279,10 +228,8 @@ function WorkCard({
             <Image src={image} alt={title} fill className="object-cover opacity-60" />
           </motion.div>
 
-          {/* dark fade */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-          {/* shine sweep */}
           <motion.div
             className="pointer-events-none absolute inset-0"
             initial={{ opacity: 0 }}
@@ -291,15 +238,14 @@ function WorkCard({
             style={{
               background:
                 "radial-gradient(200px 160px at var(--sx) var(--sy), rgba(255,255,255,0.16), rgba(255,255,255,0) 60%)",
-              // @ts-ignore CSS vars
+              // @ts-ignore
               ["--sx" as any]: shineX,
-              // @ts-ignore CSS vars
+              // @ts-ignore
               ["--sy" as any]: shineY,
               mixBlendMode: "screen",
             }}
           />
 
-          {/* bottom text */}
           <div className="absolute bottom-6 md:bottom-8 left-5 md:left-8 right-5 md:right-8">
             <motion.h3
               className="text-2xl md:text-4xl font-semibold text-white"
@@ -324,7 +270,7 @@ function WorkCard({
   );
 }
 
-// Work Section - Case Studies
+// Work Section
 function WorkSection() {
   const projects = useMemo(
     () => [
@@ -416,15 +362,27 @@ function PlaygroundSection() {
   );
 }
 
-// About Section (unchanged header block from your current)
+// ✅ ABOUT SECTION (SECTION 2) — UPDATED WITH YOUR REAL INFO + YOUR IMAGE
 function AboutSection() {
   const experience = [
-    { period: "2021 — Now", title: "Founding Product Designer", company: "Basis Theory", link: "https://basistheory.com", remote: true },
-    { period: "2022 — Now", title: "Freelance Product Designer", company: "Toptal", link: "https://toptal.com", remote: true },
-    { period: "2020 — 2021", title: "Principal Product Designer", company: "Avenue Code", link: "#", remote: true },
-    { period: "2015 — 2020", title: "Design Lead — Design Director", company: "Zello Tech", link: "#", remote: false },
-    { period: "2013 — 2014", title: "UI/UX Designer", company: "Xys Interatividade", link: "#", remote: false },
-    { period: "2011 — 2013", title: "Front-end Developer", company: "Novacia Tech", link: "#", remote: false },
+    {
+      period: "2021 — 2025",
+      title: "Co-founder, Technical Director",
+      company: "AO Digital (Tangier)",
+      link: "#",
+      remote: false,
+      note: "Digital solutions & data-driven services for aquaculture and marine-related companies",
+    },
+    { period: "2020", title: "Web apps project manager", company: "Mainroc (Digital solutions company)", link: "#", remote: false },
+    { period: "2019", title: "Internship — Production Department (4 months)", company: "Aqua Mdiq (Marine aquaculture)", link: "#", remote: false },
+    {
+      period: "2018",
+      title: "Internship — Sewage treatment plant (2 months)",
+      company: "Amendis (Electricity, water supply, wastewater management)",
+      link: "#",
+      remote: false,
+    },
+    { period: "2017", title: "Head of sector", company: "Sieta Boughaz (Urban sanitation & environmental services)", link: "#", remote: false },
   ];
 
   return (
@@ -445,59 +403,105 @@ function AboutSection() {
             </div>
           ))}
         </div>
+
         <div className="flex flex-wrap gap-8 md:gap-48 mt-4 px-4 md:px-8">
-          <span className="mono-label text-gray-500">BASED IN BRAZIL</span>
-          <span className="mono-label text-gray-500">DETAIL-ORIENTED</span>
-          <span className="mono-label text-gray-500">CURIOUS</span>
+          <span className="mono-label text-gray-500">BASED IN SWEDEN</span>
+          <span className="mono-label text-gray-500">AQUACULTURE + DIGITAL</span>
+          <span className="mono-label text-gray-500">FIELD-READY</span>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+        {/* LEFT */}
         <div>
           <div className="bg-[#141414] rounded-2xl p-6 md:p-8 mb-6 md:mb-8">
-            <p className="text-base md:text-lg leading-relaxed">
-              Product Designer with 13 years of experience, focused on creating functional and user-centered digital products with visually stunning designs.
+            <p className="text-base md:text-lg leading-relaxed text-white/90">
+              With a strong background in <span className="text-white">aquaculture</span> and hands-on experience in
+              marine and farm environments, I combine practical field work with technical and monitoring skills. I’ve
+              worked closely with aquaculture farms supporting daily operations such as stock monitoring, harvesting,
+              site visits, and farm maintenance. I adapt easily to field conditions, work effectively with farm teams,
+              and contribute reliably to production activities.
             </p>
           </div>
 
           <div className="bg-[#141414] rounded-2xl p-6 md:p-8">
             <h4 className="mono-label text-gray-400 mb-6">EXPERIENCE</h4>
+
             <div className="space-y-5 md:space-y-6">
               {experience.map((exp, index) => (
                 <div key={index} className="flex flex-col md:flex-row gap-2 md:gap-8">
                   <span className="mono-label text-gray-500 whitespace-nowrap text-xs">{exp.period}</span>
+
                   <div>
-                    <p className="font-medium text-sm md:text-base">{exp.title}</p>
-                    <div className="flex items-center gap-2 mt-1">
-                      <Link href={exp.link} className="text-sm text-gray-400 underline hover:text-white transition-colors">
-                        {exp.company}
-                      </Link>
-                      {exp.remote && <span className="text-xs px-2 py-0.5 bg-[#1f1f1f] rounded text-gray-400">Remote</span>}
+                    <p className="font-medium text-sm md:text-base text-white">{exp.title}</p>
+
+                    <div className="flex flex-col gap-1 mt-1">
+                      <div className="flex items-center gap-2">
+                        <Link href={exp.link} className="text-sm text-gray-400 underline hover:text-white transition-colors">
+                          {exp.company}
+                        </Link>
+                        {exp.remote && <span className="text-xs px-2 py-0.5 bg-[#1f1f1f] rounded text-gray-400">Remote</span>}
+                      </div>
+
+                      {"note" in exp && (exp as any).note ? (
+                        <p className="text-xs text-gray-500 leading-relaxed max-w-[56ch]">
+                          {(exp as any).note}
+                        </p>
+                      ) : null}
                     </div>
                   </div>
                 </div>
               ))}
             </div>
+
+            {/* optional bullets (matches your CV screenshot) */}
+            <div className="mt-8 border-t border-white/10 pt-6">
+              <h5 className="mono-label text-gray-400 mb-3">AQUACULTURE ACTIVITIES</h5>
+              <ul className="text-sm text-gray-300 leading-relaxed space-y-2 list-disc pl-5">
+                <li>Daily farm operations: stock monitoring, feeding, and growth observation</li>
+                <li>On-site visits: fish health, behavior, and environmental conditions</li>
+                <li>Harvest support: preparation and assistance during live harvests</li>
+                <li>Stock counting, grading, and basic biomass estimation</li>
+                <li>Water quality checks (temperature, oxygen) and production monitoring support</li>
+              </ul>
+            </div>
           </div>
         </div>
 
+        {/* RIGHT */}
         <div>
-          <div className="relative h-64 md:h-96 rounded-2xl overflow-hidden mb-6 md:mb-8">
-            <Image src="https://ext.same-assets.com/1891291079/3332482028.jpeg" alt="Radilson Gomes" fill className="object-cover" />
+          <div className="relative h-64 md:h-96 rounded-2xl overflow-hidden mb-6 md:mb-8 bg-black">
+            <Image
+              src="/images/about-otmane.png"
+              alt="Otmane Joual"
+              fill
+              className="object-cover grayscale"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority={false}
+            />
+            <div className="absolute inset-0 bg-black/25" />
+            <div
+              className="absolute inset-0 opacity-70"
+              style={{
+                background: "radial-gradient(circle at center, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0) 60%)",
+              }}
+            />
           </div>
 
           <div className="bg-[#141414] rounded-2xl p-6 md:p-8">
             <h4 className="mono-label text-gray-400 mb-6">MY BACKGROUND</h4>
             <div className="space-y-4 text-sm text-gray-300 leading-relaxed">
               <p>
-                Growing up in Brasilia, the{" "}
-                <Link href="#" className="underline hover:text-white transition-colors">
-                  modernist architectural capital
-                </Link>{" "}
-                of Brazil, my home was a fusion of creativity and analytical thinking.
+                I bridge <span className="text-white">aquaculture operations</span> and{" "}
+                <span className="text-white">digital solutions</span> — combining field experience with a technical mindset to improve monitoring,
+                reporting, and day-to-day execution on farms.
+              </p>
+              <p>
+                My focus is simple: be reliable on-site, understand real farm constraints, and help teams make decisions with better data.
               </p>
             </div>
-            <div className="mt-6 text-2xl italic text-gray-600 font-serif">Rad</div>
+
+            <div className="mt-6 text-2xl italic text-gray-600 font-serif">Otmane</div>
           </div>
         </div>
       </div>
@@ -526,7 +530,7 @@ function Footer() {
         </div>
 
         <div className="text-center text-sm text-gray-400">
-          <p>© 2026 · Radilson Gomes</p>
+          <p>© 2026 · Otmane Joual</p>
           <p className="mono-label text-gray-600">ALL RIGHTS RESERVED</p>
         </div>
       </div>
@@ -536,13 +540,11 @@ function Footer() {
 
 // Main Page
 export default function Home() {
-  // keeping your current order: hero -> about -> bento -> work -> playground
   return (
     <main className="min-h-screen bg-[#0a0a0a]">
       <Navigation />
       <Sidebar />
       <HeroIntro />
-      <IntroSection />
       <AboutSection />
       <BentoGrid />
       <WorkSection />
