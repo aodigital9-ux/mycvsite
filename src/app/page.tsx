@@ -286,7 +286,7 @@ function WorkCard({
 }
 
 // Work Section
-function WorkSection({ onOpenA quaOps }: { onOpenAquaOps: () => void }) {
+function WorkSection({ onOpenAquaOps }: { onOpenAquaOps: () => void }) {
  const projects = useMemo(
  () => [
  {
