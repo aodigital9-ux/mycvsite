@@ -600,10 +600,10 @@ export default function Home() {
  category: "Aquaculture Operations Platform",
  image: "/images/aquaops-cover.png",
  description:
- "AquaOps is a farm operations platform designed for aquaculture teams to monitor cage performance, track mortality, review environmental conditions, and manage daily farm operations from a single interface.",
+ "AquaOps is an aquaculture farm operations platform designed to help farm teams monitor cage performance, track mortality, review environmental conditions, and manage daily production activities through a single operational interface.",
  longDescription:
- "Built as a digital operational layer for aquaculture farms, AquaOps centralizes cage monitoring, mortality logging, feeding overview, environmental conditions, and task visibility into one structured dashboard. The product is designed to help operators quickly identify risk, navigate between cages, and make operational decisions with less friction.",
- role: "Product design, UI/UX, frontend development, operations logic",
+ "Built as a digital operational layer for aquaculture farms, AquaOps centralizes cage monitoring, mortality logging, feeding overview, environmental parameters, and task visibility into one structured dashboard, enabling operators to quickly identify risks, navigate between cages, and make faster operational decisions with less friction. What makes this project especially valuable is that it was developed alongside direct field exposure: I had the opportunity to be involved in day-to-day farm operations, receive full production training, and closely understand how aquaculture workflows function in practice at Aquamdiq, the largest marine aquaculture company in Morocco. This operational immersion allowed me to design the platform based on real production needs rather than assumptions. In parallel, I also trained farm operators on how to use the application effectively, ensuring that the digital tool could be integrated smoothly into daily routines and adopted by teams in the field",
+ role: "Product design, operational workflow translation, field observation, operator onboarding, and direct farm operational involvement.",
  tools: ["Next.js", "Tailwind CSS", "Supabase", "TypeScript"],
  features: [
  "Farm overview dashboard",
