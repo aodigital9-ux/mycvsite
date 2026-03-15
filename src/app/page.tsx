@@ -7,7 +7,6 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import HeroIntro from "@/components/HeroIntro";
 import ProjectModal from "@/components/ProjectModal";
 
-// Pink asterisk component
 function PinkAsterisk({ className = "" }: { className?: string }) {
   return (
     <svg className={className} width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -16,7 +15,6 @@ function PinkAsterisk({ className = "" }: { className?: string }) {
   );
 }
 
-// Navigation component
 function Navigation() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-8 py-4 md:py-6 bg-[#0a0a0a]/80 backdrop-blur-md">
@@ -39,7 +37,6 @@ function Navigation() {
   );
 }
 
-// Sidebar component
 function Sidebar() {
   return (
     <div className="hidden md:flex fixed right-0 top-1/2 -translate-y-1/2 z-40 flex-col">
@@ -54,7 +51,6 @@ function Sidebar() {
   );
 }
 
-// Bento Grid Section
 function BentoGrid() {
   return (
     <section className="px-4 md:px-8 py-8 md:py-16 max-w-6xl mx-auto">
@@ -96,7 +92,6 @@ function BentoGrid() {
   );
 }
 
-// Title marquee
 function SectionTitleMarquee({
   leftWord,
   rightWord,
@@ -150,7 +145,6 @@ function SectionTitleMarquee({
   );
 }
 
-// Animated Work Card
 function WorkCard({
   name,
   year,
@@ -283,8 +277,19 @@ function WorkCard({
   );
 }
 
-// Work Section
-function WorkSection({ onOpenProject }: { onOpenProject: (projectKey: "azura" | "lesdomaines" | "aquaops") => void }) {
+function WorkSection({
+  onOpenProject,
+}: {
+  onOpenProject: (
+    projectKey:
+      | "azura"
+      | "lesdomaines"
+      | "aquaops"
+      | "ecomya"
+      | "apm"
+      | "movenpick"
+  ) => void;
+}) {
   const projects = useMemo(
     () => [
       {
@@ -310,6 +315,30 @@ function WorkSection({ onOpenProject }: { onOpenProject: (projectKey: "azura" | 
         title: "Aquaculture Farm",
         subtitle: "Operations Dashboard",
         image: "/images/aquaops-cover.png",
+      },
+      {
+        key: "ecomya" as const,
+        name: "Ecomya",
+        year: "2023",
+        title: "Commerce Platform",
+        subtitle: "Automation System",
+        image: "/images/ecomya-cover.png",
+      },
+      {
+        key: "apm" as const,
+        name: "APM Terminals Tangier",
+        year: "2022",
+        title: "Port Terminal",
+        subtitle: "Digital Presence",
+        image: "/images/apm-cover.png",
+      },
+      {
+        key: "movenpick" as const,
+        name: "Mövenpick Tangier",
+        year: "2022",
+        title: "Hospitality Web",
+        subtitle: "SEO & Social Media",
+        image: "/images/movenpick-cover.png",
       },
     ],
     []
@@ -348,7 +377,6 @@ function WorkSection({ onOpenProject }: { onOpenProject: (projectKey: "azura" | 
   );
 }
 
-// Playground Section
 function PlaygroundSection() {
   const projects = [
     { name: "Kapa.ai", type: "WEBDESIGN", image: "https://ext.same-assets.com/1891291079/3915969036.png" },
@@ -385,7 +413,6 @@ function PlaygroundSection() {
   );
 }
 
-// About Section
 function AboutSection() {
   const experience = [
     {
@@ -529,7 +556,6 @@ function AboutSection() {
   );
 }
 
-// Footer
 function Footer() {
   return (
     <footer className="px-4 md:px-8 py-12 md:py-16 border-t border-[#1f1f1f]">
@@ -558,7 +584,6 @@ function Footer() {
   );
 }
 
-// Main Page
 export default function Home() {
   const [selectedProject, setSelectedProject] = useState<null | {
     title: string;
@@ -574,7 +599,15 @@ export default function Home() {
     liveUrl?: string;
   }>(null);
 
-  const openProject = (projectKey: "azura" | "lesdomaines" | "aquaops") => {
+  const openProject = (
+    projectKey:
+      | "azura"
+      | "lesdomaines"
+      | "aquaops"
+      | "ecomya"
+      | "apm"
+      | "movenpick"
+  ) => {
     if (projectKey === "azura") {
       setSelectedProject({
         title: "Azura Aqua Operations Platform",
@@ -615,9 +648,9 @@ export default function Home() {
         category: "Agribusiness Digital Strategy",
         image: "/images/lesdomaines-cover.png",
         description:
-          "Les Domaines Agricoles is one of the largest agribusiness groups in Morocco, where I introduced a digital strategy focused on promoting their aquaculture products.",
+          "Introduced a digital strategy focused on promoting aquaculture products for one of the largest agribusiness groups in Morocco.",
         longDescription:
-          "The work involved building a 360° digital growth approach, starting from the design and creation of a dedicated e-commerce section for their aquaculture product line, and extending to the full digital acquisition strategy across multiple channels. This included defining how traffic would be generated toward the website through organic social media, paid advertising campaigns, SEO optimization, and digital content positioning, with the objective of transforming digital presence into a commercial channel for seafood product visibility and sales. The project combined strategic thinking, digital product design, and channel planning, with the goal of aligning aquaculture product promotion with modern consumer acquisition methods.",
+          "The project involved building a 360° digital growth approach, starting from the design and creation of a dedicated e-commerce section for the aquaculture product line, and extending to the full digital acquisition strategy across multiple channels. This included planning how traffic would be generated through organic social media, paid advertising, SEO optimization, and digital content positioning, with the objective of turning digital presence into a commercial channel for seafood product visibility and sales.",
         role:
           "Digital strategy development, e-commerce structuring, acquisition channel planning, and digital positioning for aquaculture products.",
         tools: [
@@ -645,31 +678,142 @@ export default function Home() {
       return;
     }
 
+    if (projectKey === "aquaops") {
+      setSelectedProject({
+        title: "AquaOps",
+        year: "2026",
+        category: "Aquaculture Operations Platform",
+        image: "/images/aquaops-cover.png",
+        description:
+          "AquaOps is an aquaculture farm operations platform designed to help farm teams monitor cage performance, track mortality, review environmental conditions, and manage daily production activities through a single operational interface.",
+        longDescription:
+          "Built as a digital operational layer for aquaculture farms, AquaOps centralizes cage monitoring, mortality logging, feeding overview, environmental parameters, and task visibility into one structured dashboard, enabling operators to quickly identify risks, navigate between cages, and make faster operational decisions with less friction. What makes this project especially valuable is that it was developed alongside direct field exposure: I had the opportunity to be involved in day-to-day farm operations, receive full production training, and closely understand how aquaculture workflows function in practice at Aquamdiq, the largest marine aquaculture company in Morocco. This operational immersion allowed me to design the platform based on real production needs rather than assumptions. In parallel, I also trained farm operators on how to use the application effectively, ensuring that the digital tool could be integrated smoothly into daily routines and adopted by teams in the field.",
+        role:
+          "Product design, operational workflow translation, field observation, operator onboarding, and direct farm operational involvement.",
+        tools: ["Next.js", "Tailwind CSS", "Supabase", "TypeScript"],
+        features: [
+          "Farm overview dashboard",
+          "Per-cage monitoring",
+          "Mortality logging",
+          "Environmental metrics tracking",
+          "Risk / watch / good status system",
+          "Fast navigation between cages"
+        ],
+        gallery: [
+          "/images/aquaops-1.png",
+          "/images/aquaops-2.png",
+          "/images/aquaops-3.png",
+          "/images/aquaops-4.png"
+        ],
+        liveUrl: "#"
+      });
+      return;
+    }
+
+    if (projectKey === "ecomya") {
+      setSelectedProject({
+        title: "Ecomya Commerce Automation Platform",
+        year: "2023",
+        category: "E-commerce Operations Platform",
+        image: "/images/ecomya-cover.png",
+        description:
+          "Contributed to the development and structuring of a digital commerce platform designed to simplify e-commerce operations for emerging brands and online sellers.",
+        longDescription:
+          "The platform brings together storefront creation, supplier synchronization, dropshipping logistics, order management, and payment workflows in one system, helping users launch and manage online businesses with less operational friction. Main features included product import automation, inventory synchronization, order tracking, cash-on-delivery management, customer communication workflows, and logistics coordination. The platform also integrated growth tools such as SEO modules, WhatsApp sales support, affiliate systems, referral logic, and flexible sales features adapted to local market realities.",
+        role:
+          "Product structuring, digital workflow design, commerce operations logic, and platform growth strategy.",
+        tools: [
+          "E-commerce Logic",
+          "Automation",
+          "SEO",
+          "WhatsApp Workflows"
+        ],
+        features: [
+          "Storefront creation",
+          "Supplier synchronization",
+          "Dropshipping logistics",
+          "Order and payment workflows",
+          "Affiliate and referral systems",
+          "SEO and customer communication tools"
+        ],
+        gallery: [
+          "/images/ecomya-1.png",
+          "/images/ecomya-2.png",
+          "/images/ecomya-3.png",
+          "/images/ecomya-4.png"
+        ],
+        liveUrl: "#"
+      });
+      return;
+    }
+
+    if (projectKey === "apm") {
+      setSelectedProject({
+        title: "APM Terminals Tangier",
+        year: "2022",
+        category: "Corporate Web Presence & Tool Integration",
+        image: "/images/apm-cover.png",
+        description:
+          "Led the digital presence of APM Terminals Tangier through website development, social media management, and digital performance monitoring.",
+        longDescription:
+          "The work focused on maintaining a clear and structured web presence that presents terminal services, operational information, customer access points, and corporate communication in an accessible way. The website includes integrations for customer-facing tools such as track-and-trace, vessel schedules, and gate appointment access, allowing operational services to remain easily reachable inside the website ecosystem. Social media communication and analytics tracking were also managed to improve visibility, engagement, and digital performance across channels. The operational tracking tools themselves were not built by us — our role was to integrate them seamlessly into the digital experience.",
+        role:
+          "Website development, digital communication, analytics monitoring, and operational tool integration.",
+        tools: [
+          "Website Development",
+          "Analytics",
+          "Social Media",
+          "Tool Integration"
+        ],
+        features: [
+          "Corporate website structuring",
+          "Track-and-trace integration",
+          "Vessel schedule access",
+          "Gate appointment access",
+          "Social media management",
+          "Digital performance monitoring"
+        ],
+        gallery: [
+          "/images/apm-1.png",
+          "/images/apm-2.png",
+          "/images/apm-3.png",
+          "/images/apm-4.png"
+        ],
+        liveUrl: "#"
+      });
+      return;
+    }
+
     setSelectedProject({
-      title: "AquaOps",
-      year: "2026",
-      category: "Aquaculture Operations Platform",
-      image: "/images/aquaops-cover.png",
+      title: "Mövenpick Tangier",
+      year: "2022",
+      category: "Hospitality Web Presence & SEO",
+      image: "/images/movenpick-cover.png",
       description:
-        "AquaOps is an aquaculture farm operations platform designed to help farm teams monitor cage performance, track mortality, review environmental conditions, and manage daily production activities through a single operational interface.",
+        "Worked on the digital presence of Mövenpick Tangier through webpage development, social media management, and SEO optimization.",
       longDescription:
-        "Built as a digital operational layer for aquaculture farms, AquaOps centralizes cage monitoring, mortality logging, feeding overview, environmental parameters, and task visibility into one structured dashboard, enabling operators to quickly identify risks, navigate between cages, and make faster operational decisions with less friction. What makes this project especially valuable is that it was developed alongside direct field exposure: I had the opportunity to be involved in day-to-day farm operations, receive full production training, and closely understand how aquaculture workflows function in practice at Aquamdiq, the largest marine aquaculture company in Morocco. This operational immersion allowed me to design the platform based on real production needs rather than assumptions. In parallel, I also trained farm operators on how to use the application effectively, ensuring that the digital tool could be integrated smoothly into daily routines and adopted by teams in the field.",
+        "The work focused on improving how the hotel property was presented online, with attention to user experience, destination visibility, and booking-oriented content. The page highlights the hotel’s location overlooking the Bay of Tangier, its accommodation offer, business facilities, gardens, pool, and proximity to the city center. In parallel, social media communication was managed to maintain a consistent hospitality-focused brand presence, while SEO work improved discoverability and search relevance. The overall objective was to connect content, visibility, and booking intent within a coherent digital presence.",
       role:
-        "Product design, operational workflow translation, field observation, operator onboarding, and direct farm operational involvement.",
-      tools: ["Next.js", "Tailwind CSS", "Supabase", "TypeScript"],
+        "Web content structuring, social media management, and SEO execution.",
+      tools: [
+        "SEO",
+        "Web Content",
+        "Social Media",
+        "Hospitality Positioning"
+      ],
       features: [
-        "Farm overview dashboard",
-        "Per-cage monitoring",
-        "Mortality logging",
-        "Environmental metrics tracking",
-        "Risk / watch / good status system",
-        "Fast navigation between cages"
+        "Hotel page development",
+        "Destination-focused content",
+        "SEO optimization",
+        "Social media communication",
+        "Booking-oriented structure",
+        "Brand visibility support"
       ],
       gallery: [
-        "/images/aquaops-1.png",
-        "/images/aquaops-2.png",
-        "/images/aquaops-3.png",
-        "/images/aquaops-4.png"
+        "/images/movenpick-1.png",
+        "/images/movenpick-2.png",
+        "/images/movenpick-3.png",
+        "/images/movenpick-4.png"
       ],
       liveUrl: "#"
     });
