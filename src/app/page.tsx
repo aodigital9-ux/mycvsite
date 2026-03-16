@@ -296,24 +296,24 @@ function WorkSection({
         key: "azura" as const,
         name: "Azura",
         year: "2025",
-        title: "Shellfish Farm",
+        title: "Shellfish Farm Azura",
         subtitle: "Operations Platform",
         image: "/images/azura-cover.png",
       },
       {
         key: "lesdomaines" as const,
-        name: "Les Domaines Agricoles",
+        name: "Les Domaines",
         year: "2024",
-        title: "Aquaculture Product",
+        title: "Fish Farm Lesdomaines",
         subtitle: "Digital Growth Strategy",
         image: "/images/lesdomaines-cover.png",
       },
       {
         key: "aquaops" as const,
-        name: "AquaOps",
+        name: "Aquamdiq",
         year: "2026",
-        title: "Aquaculture Farm",
-        subtitle: "Operations Dashboard",
+        title: "Marine Fish Farm Aquamdiq",
+        subtitle: "Operations Platform",
         image: "/images/aquaops-cover.png",
       },
       {
@@ -326,7 +326,7 @@ function WorkSection({
       },
       {
         key: "apm" as const,
-        name: "APM Terminals Tangier",
+        name: "APM Tangier",
         year: "2022",
         title: "Port Terminal",
         subtitle: "Digital Presence",
@@ -334,7 +334,7 @@ function WorkSection({
       },
       {
         key: "movenpick" as const,
-        name: "Mövenpick Tangier",
+        name: "Mövenpick",
         year: "2022",
         title: "Hospitality Web",
         subtitle: "SEO & Social Media",
@@ -597,6 +597,7 @@ export default function Home() {
     features: string[];
     gallery: string[];
     liveUrl?: string;
+    buttonLabel?: string;
   }>(null);
 
   const openProject = (
@@ -610,22 +611,23 @@ export default function Home() {
   ) => {
     if (projectKey === "azura") {
       setSelectedProject({
-        title: "Azura Aqua Operations Platform",
+        title: "Azura AquaOps",
         year: "2025",
         category: "Industrial Shellfish Operations Platform",
         image: "/images/azura-cover.png",
         description:
           "Designed a full digital operations platform for industrial aquaculture management, built to support a vertically integrated shellfish production system from hatchery to export.",
         longDescription:
-          "The platform centralizes farm activity across all production stages including phytoplankton culture, hatchery monitoring, grow-out park supervision, purification workflows, harvest planning, logistics, and production analytics. Main modules include real-time environmental monitoring, larval survival tracking, biomass and occupancy dashboards, operational task assignment, maintenance logs, quality control workflows, harvest forecasting, traceability records, and distribution management. The system was conceived as a digital operational layer to improve visibility across the farm, reduce manual reporting, and support faster decision-making through live KPIs and structured production data.",
+          "The platform centralizes farm activity across all production stages including phytoplankton culture, hatchery monitoring, grow-out park supervision, purification workflows, harvest planning, logistics, and production analytics. Main modules include real-time environmental monitoring, larval survival tracking, biomass and occupancy dashboards, operational task assignment, maintenance logs, quality control workflows, harvest forecasting, traceability records, and distribution management. Beyond the digital side, I also managed to spend time inside the farm environment and monitor parts of the production workflow directly, which gave me a practical foundation in the operational field. This helped shape the platform around real production visibility needs, reporting structure, and day-to-day operational logic.",
         role:
           "Product design, aquaculture operations structuring, production workflow mapping, and digital system architecture.",
         tools: [
-          "Product Design",
-          "UI/UX",
-          "Operations Planning",
-          "Dashboard Design",
-          "Monitoring Logic"
+          "React",
+          "Vite",
+          "Tailwind CSS",
+          "React",
+          "Netlify",
+          "Supabase"
         ],
         features: [
           "Hatchery and phytoplankton workflow visibility",
@@ -635,8 +637,14 @@ export default function Home() {
           "Traceability and distribution records",
           "Live KPI dashboards and structured reporting"
         ],
-        gallery: [],
-        liveUrl: "#"
+        gallery: [
+          "/images/azura-1.png",
+          "/images/azura-2.png",
+          "/images/azura-3.png",
+          "/images/azura-4.png"
+        ],
+        liveUrl: "https://azura-group.com/activite/aquaculture/",
+        buttonLabel: "Azura"
       });
       return;
     }
@@ -667,13 +675,9 @@ export default function Home() {
           "Social media campaign architecture",
           "Digital sales funnel design"
         ],
-        gallery: [
-          "/images/lesdomaines-1.png",
-          "/images/lesdomaines-2.png",
-          "/images/lesdomaines-3.png",
-          "/images/lesdomaines-4.png"
-        ],
-        liveUrl: "#"
+        gallery: ["/images/lesdomaines-1.png"],
+        liveUrl: "https://rabat.boutiquelesdomaines.ma/poissonnerie-4",
+        buttonLabel: "Les Domaines"
       });
       return;
     }
@@ -685,9 +689,9 @@ export default function Home() {
         category: "Aquaculture Operations Platform",
         image: "/images/aquaops-cover.png",
         description:
-          "AquaOps is an aquaculture farm operations platform designed to help farm teams monitor cage performance, track mortality, review environmental conditions, and manage daily production activities through a single operational interface.",
+          "Aquamdiq is the largest marine aquaculture farm in Morocco, and AquaOps is an aquaculture farm operations platform designed to help farm teams monitor cage performance, track mortality, review environmental conditions, and manage daily production activities through a single operational interface.",
         longDescription:
-          "Built as a digital operational layer for aquaculture farms, AquaOps centralizes cage monitoring, mortality logging, feeding overview, environmental parameters, and task visibility into one structured dashboard, enabling operators to quickly identify risks, navigate between cages, and make faster operational decisions with less friction. What makes this project especially valuable is that it was developed alongside direct field exposure: I had the opportunity to be involved in day-to-day farm operations, receive full production training, and closely understand how aquaculture workflows function in practice at Aquamdiq, the largest marine aquaculture company in Morocco. This operational immersion allowed me to design the platform based on real production needs rather than assumptions. In parallel, I also trained farm operators on how to use the application effectively, ensuring that the digital tool could be integrated smoothly into daily routines and adopted by teams in the field.",
+          "Built as a digital operational layer for aquaculture farms, AquaOps centralizes cage monitoring, mortality logging, feeding overview, environmental parameters, and task visibility into one structured dashboard, enabling operators to quickly identify risks, navigate between cages, and make faster operational decisions with less friction. What makes this project especially valuable is that it was developed alongside direct field exposure: I had the opportunity to be involved in day-to-day farm operations, receive full production training, and closely understand how aquaculture workflows function in practice at Aquamdiq. This operational immersion allowed me to design the platform based on real production needs rather than assumptions. In parallel, I also trained farm operators on how to use the application effectively, ensuring that the digital tool could be integrated smoothly into daily routines and adopted by teams in the field.",
         role:
           "Product design, operational workflow translation, field observation, operator onboarding, and direct farm operational involvement.",
         tools: ["Next.js", "Tailwind CSS", "Supabase", "TypeScript"],
@@ -703,9 +707,9 @@ export default function Home() {
           "/images/aquaops-1.png",
           "/images/aquaops-2.png",
           "/images/aquaops-3.png",
-          "/images/aquaops-4.png"
-        ],
-        liveUrl: "#"
+          "/images/aquaops-4.png",
+          "/images/aquaops-5.png"
+        ]
       });
       return;
     }
@@ -742,7 +746,8 @@ export default function Home() {
           "/images/ecomya-3.png",
           "/images/ecomya-4.png"
         ],
-        liveUrl: "#"
+        liveUrl: "https://ecomya.services/en/",
+        buttonLabel: "Ecomya"
       });
       return;
     }
@@ -773,13 +778,9 @@ export default function Home() {
           "Social media management",
           "Digital performance monitoring"
         ],
-        gallery: [
-          "/images/apm-1.png",
-          "/images/apm-2.png",
-          "/images/apm-3.png",
-          "/images/apm-4.png"
-        ],
-        liveUrl: "#"
+        gallery: ["/images/apm-1.png"],
+        liveUrl: "#",
+        buttonLabel: "APM Terminals Tangier"
       });
       return;
     }
@@ -809,13 +810,7 @@ export default function Home() {
         "Booking-oriented structure",
         "Brand visibility support"
       ],
-      gallery: [
-        "/images/movenpick-1.png",
-        "/images/movenpick-2.png",
-        "/images/movenpick-3.png",
-        "/images/movenpick-4.png"
-      ],
-      liveUrl: "#"
+      gallery: []
     });
   };
 
