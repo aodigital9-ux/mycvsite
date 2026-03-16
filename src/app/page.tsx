@@ -17,20 +17,16 @@ function PinkAsterisk({ className = "" }: { className?: string }) {
 
 function Navigation() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-8 py-4 md:py-6 bg-[#0a0a0a]/80 backdrop-blur-md">
-      <Link href="/" className="flex items-center gap-1">
-        <span className="text-xl md:text-2xl font-bold tracking-tight">RAD</span>
-        <span className="text-[#e91e63] text-xl md:text-2xl">*</span>
-      </Link>
+    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-end px-4 md:px-8 py-4 md:py-6 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/5">
       <div className="hidden md:flex items-center gap-8">
-        <Link href="#work" className="mono-label text-gray-400 hover:text-white transition-colors">
-          <span className="text-gray-600">01</span> Work
-        </Link>
-        <Link href="#playground" className="mono-label text-gray-400 hover:text-white transition-colors">
-          <span className="text-gray-600">02</span> Playground
-        </Link>
         <Link href="#about" className="mono-label text-gray-400 hover:text-white transition-colors">
-          <span className="text-gray-600">03</span> About Me
+          About me
+        </Link>
+        <Link href="#featured-projects" className="mono-label text-gray-400 hover:text-white transition-colors">
+          Featured projects
+        </Link>
+        <Link href="#detailed-oriented" className="mono-label text-gray-400 hover:text-white transition-colors">
+          Detailed oriented
         </Link>
       </div>
     </nav>
@@ -48,47 +44,6 @@ function Sidebar() {
         Honors
       </button>
     </div>
-  );
-}
-
-function BentoGrid() {
-  return (
-    <section className="px-4 md:px-8 py-8 md:py-16 max-w-6xl mx-auto">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-        <div className="bg-[#1a1a1a] rounded-2xl p-6 aspect-square flex flex-col items-center justify-center hover:bg-[#222] transition-colors cursor-pointer">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-            <polygon points="5 3 19 12 5 21 5 3" />
-          </svg>
-          <span className="mono-label text-gray-400 mt-4">LOOK</span>
-          <span className="mono-label text-gray-400">AROUND</span>
-        </div>
-
-        <div className="bg-[#2a2a2a] rounded-2xl p-6 aspect-square flex items-center justify-center hover:bg-[#333] transition-colors cursor-pointer">
-          <span className="text-5xl md:text-6xl font-light text-gray-400">k</span>
-        </div>
-
-        <div className="bg-[#1f1f1f] rounded-2xl p-6 aspect-square flex items-center justify-center hover:bg-[#252525] transition-colors cursor-pointer">
-          <div className="border-2 border-gray-600 rounded-lg p-3 md:p-4">
-            <span className="text-3xl md:text-4xl font-light text-gray-400">1</span>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-2xl p-4 md:p-6 aspect-square text-black hover:bg-gray-100 transition-colors cursor-pointer">
-          <h4 className="font-semibold text-sm md:text-base">Basis Theory Docs</h4>
-          <p className="text-[10px] md:text-xs text-gray-600 mt-2">
-            Basis Theory will guide you on how to safely collect, share, process and govern your applications.
-          </p>
-          <div className="mt-4 flex gap-2">
-            <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gray-100 flex items-center justify-center border border-gray-200">
-              <span className="text-[8px] md:text-xs text-gray-500">Get</span>
-            </div>
-            <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gray-100 flex items-center justify-center border border-gray-200">
-              <span className="text-[8px] md:text-xs text-gray-500">Col</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -345,13 +300,16 @@ function WorkSection({
   );
 
   return (
-    <section id="work" className="px-4 md:px-8 py-16 md:py-24 max-w-6xl mx-auto">
-      <div className="flex items-center gap-4 mb-8 md:mb-12">
-        <span className="text-6xl md:text-8xl font-bold text-gray-800">01</span>
+    <section id="featured-projects" className="px-4 md:px-8 py-16 md:py-24 max-w-6xl mx-auto">
+      <div className="mb-8 md:mb-12">
         <PinkAsterisk className="w-5 h-5 md:w-6 md:h-6" />
       </div>
 
-      <SectionTitleMarquee leftWord="WORK" rightWord="WORK" labels={["CASE STUDIES", "PRODUCT DESIGN", "HIGHLIGHTS"]} />
+      <SectionTitleMarquee
+        leftWord="FEATURED"
+        rightWord="PROJECTS"
+        labels={["CASE STUDIES", "PRODUCT DESIGN", "DIGITAL STRATEGY"]}
+      />
 
       <div className="mt-10 md:mt-14 grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
         {projects.map((p, idx) => (
@@ -377,37 +335,112 @@ function WorkSection({
   );
 }
 
-function PlaygroundSection() {
-  const projects = [
-    { name: "Kapa.ai", type: "WEBDESIGN", image: "https://ext.same-assets.com/1891291079/3915969036.png" },
-    { name: "Event Ticketing App", type: "WEB APP", image: "https://ext.same-assets.com/1891291079/559246829.webp" },
-    { name: "SendSecure.ly", type: "WEB APP", image: "https://ext.same-assets.com/1891291079/1057073512.webp" },
-    { name: "Mobile Banking Suite", type: "MOBILE", image: "https://ext.same-assets.com/1891291079/4030116513.png" },
-    { name: "Rio's Botanical Garden", type: "MOBILE", image: "https://ext.same-assets.com/1891291079/3139325625.jpeg" },
-    { name: "Shopping App Concept", type: "MOBILE", image: "https://ext.same-assets.com/1891291079/2259630177.png" },
+function DetailedOrientedSection() {
+  const education = [
+    {
+      period: "2018 — 2020",
+      title: "Master’s Degree — Marine Environment & Aquaculture",
+      school: "Higher Institute of Maritime Studies",
+    },
+    {
+      period: "2015 — 2018",
+      title: "Bachelor’s studies in environmental and life sciences",
+      school: "Academic track focused on marine and biological systems",
+    },
+    {
+      period: "Ongoing",
+      title: "Intensive self-learning in digital tools, web development, automation, and product building",
+      school: "Hands-on project-based learning",
+    },
+  ];
+
+  const toolStack = [
+    "React",
+    "TypeScript",
+    "Visual Studio Code",
+    "Netlify",
+    "Supabase",
+    "Tailwind CSS",
+    "Brave",
+    "GIS",
   ];
 
   return (
-    <section id="playground" className="px-4 md:px-8 py-16 md:py-24 max-w-6xl mx-auto">
-      <div className="flex items-center gap-4 mb-8 md:mb-12">
-        <span className="text-6xl md:text-8xl font-bold text-gray-800">02</span>
+    <section id="detailed-oriented" className="px-4 md:px-8 py-16 md:py-24 max-w-6xl mx-auto">
+      <div className="mb-8 md:mb-12">
         <PinkAsterisk className="w-5 h-5 md:w-6 md:h-6" />
       </div>
 
-      <SectionTitleMarquee leftWord="PLAYGROUND" rightWord="PLAYGROUND" labels={["OTHER PROJECTS", "EXPERIMENTS", "UI STUDIES"]} />
+      <SectionTitleMarquee
+        leftWord="DETAILED"
+        rightWord="ORIENTED"
+        labels={["EDUCATION", "TOOLS", "PERSONAL TASTE"]}
+      />
 
-      <div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-        {projects.map((project, index) => (
-          <div key={index} className="bg-[#141414] rounded-2xl overflow-hidden project-card cursor-pointer group">
-            <div className="relative h-40 md:h-48 overflow-hidden">
-              <Image src={project.image} alt={project.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-            </div>
-            <div className="p-4 flex items-center justify-between">
-              <span className="text-sm font-medium">{project.name}</span>
-              <span className="mono-label text-gray-500">{project.type}</span>
+      <div className="mt-12 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6">
+        <div className="space-y-6">
+          <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 md:p-8">
+            <h3 className="mb-8 text-xl md:text-2xl font-semibold text-white">Education</h3>
+            <div className="space-y-8">
+              {education.map((item, index) => (
+                <div key={index} className="grid md:grid-cols-[180px_1fr] gap-3 md:gap-6">
+                  <div className="text-sm text-gray-500 mono-label">{item.period}</div>
+                  <div>
+                    <p className="text-white font-medium text-base md:text-lg">{item.title}</p>
+                    <p className="mt-1 text-gray-400 text-sm md:text-base">{item.school}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        ))}
+
+          <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 md:p-8">
+            <h3 className="mb-8 text-xl md:text-2xl font-semibold text-white">Tool stack</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {toolStack.map((tool) => (
+                <div
+                  key={tool}
+                  className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-center text-sm text-white/85"
+                >
+                  {tool}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 md:p-8">
+          <p className="mb-4 mono-label text-cyan-300">PERSONAL TASTE</p>
+          <h3 className="text-2xl md:text-3xl font-semibold text-white leading-tight">
+            Calm, focused, detail-driven.
+          </h3>
+          <p className="mt-4 text-white/70 leading-7">
+            I like building things that feel clear, useful, and well-structured. In work and in life, I naturally
+            lean toward precision, simplicity, and systems that make sense.
+          </p>
+
+          <div className="mt-8 space-y-4">
+            <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
+              <p className="text-xs mono-label text-cyan-300 mb-2">CURRENT VIBE</p>
+              <p className="text-white font-medium text-lg">The Night We Met</p>
+              <p className="text-white/55 text-sm mt-1">Lord Huron</p>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
+              <p className="text-xs mono-label text-cyan-300 mb-2">WORK STYLE</p>
+              <p className="text-white/80 text-sm leading-7">
+                Structured thinking, visual clarity, operational logic, and patience when building something properly.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
+              <p className="text-xs mono-label text-cyan-300 mb-2">WHAT I VALUE</p>
+              <p className="text-white/80 text-sm leading-7">
+                Real-world usefulness, clean interfaces, strong systems, and thoughtful execution.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -437,8 +470,7 @@ function AboutSection() {
 
   return (
     <section id="about" className="px-4 md:px-8 py-16 md:py-24 max-w-6xl mx-auto">
-      <div className="flex items-center gap-4 mb-8 md:mb-12">
-        <span className="text-6xl md:text-8xl font-bold text-gray-800">03</span>
+      <div className="mb-8 md:mb-12">
         <PinkAsterisk className="w-5 h-5 md:w-6 md:h-6" />
       </div>
 
@@ -560,11 +592,7 @@ function Footer() {
   return (
     <footer className="px-4 md:px-8 py-12 md:py-16 border-t border-[#1f1f1f]">
       <div className="max-w-6xl mx-auto">
-        <div className="flex items-center justify-between mb-12 md:mb-16">
-          <Link href="/" className="flex items-center gap-1">
-            <span className="text-xl md:text-2xl font-bold tracking-tight">RAD</span>
-            <span className="text-[#e91e63] text-xl md:text-2xl">*</span>
-          </Link>
+        <div className="flex items-center justify-end mb-12 md:mb-16">
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="w-10 h-10 rounded-full border border-[#333] flex items-center justify-center hover:bg-[#1f1f1f] transition-colors"
@@ -821,9 +849,8 @@ export default function Home() {
         <Sidebar />
         <HeroIntro />
         <AboutSection />
-        <BentoGrid />
         <WorkSection onOpenProject={openProject} />
-        <PlaygroundSection />
+        <DetailedOrientedSection />
         <Footer />
       </main>
 
