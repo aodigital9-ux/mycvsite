@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { Mail, MapPin, Facebook, ExternalLink } from "lucide-react";
 import HeroIntro from "@/components/HeroIntro";
 import ProjectModal from "@/components/ProjectModal";
 
@@ -340,29 +341,51 @@ function DetailedOrientedSection() {
     {
       period: "2018 — 2020",
       title: "Master’s Degree — Marine Environment & Aquaculture",
-      school: "Higher Institute of Maritime Studies",
+      school: "Academic specialization in aquaculture systems, marine environment, and production understanding.",
     },
     {
       period: "2015 — 2018",
-      title: "Bachelor’s studies in environmental and life sciences",
-      school: "Academic track focused on marine and biological systems",
+      title: "Bachelor-level studies in life and environmental sciences",
+      school: "Scientific foundation in biology, environment, and applied field observation.",
     },
     {
-      period: "Ongoing",
-      title: "Intensive self-learning in digital tools, web development, automation, and product building",
-      school: "Hands-on project-based learning",
+      period: "2019 — 2025",
+      title: "Intensive self-learning in web apps, product building, digital strategy, automation, and technical tools",
+      school: "Project-based learning through real client work, digital agency execution, and independent building.",
     },
   ];
 
-  const toolStack = [
-    "React",
-    "TypeScript",
-    "Visual Studio Code",
-    "Netlify",
-    "Supabase",
-    "Tailwind CSS",
-    "Brave",
-    "GIS",
+  const tools = [
+    { short: "Fg", label: "Figma" },
+    { short: "Fr", label: "Framer" },
+    { short: "Re", label: "React" },
+    { short: "TS", label: "TypeScript" },
+    { short: "VS", label: "Visual Studio" },
+    { short: "NL", label: "Netlify" },
+    { short: "SB", label: "Supabase" },
+    { short: "TW", label: "Tailwind" },
+    { short: "No", label: "Notion" },
+    { short: "VN", label: "VN" },
+    { short: "Br", label: "Brave" },
+    { short: "GIS", label: "GIS" },
+  ];
+
+  const songs = [
+    {
+      title: "Current vibe 01",
+      artist: "Spotify pick",
+      url: "https://open.spotify.com/track/2IJftBfq7pJ43tfnOR0RB3?si=ytTjSX2kRzmwHWpE1inh7g%0A",
+    },
+    {
+      title: "Current vibe 02",
+      artist: "Spotify pick",
+      url: "https://open.spotify.com/track/6CU68VwcV10VfulVQMfj3X?si=OR4VDJhPTI6XeW7A6mevbw",
+    },
+    {
+      title: "Current vibe 03",
+      artist: "Spotify pick",
+      url: "https://open.spotify.com/track/13cpOnmccZGVGFngLxYN4I?si=X4fgQyU2S0mx3miyFqoWpA",
+    },
   ];
 
   return (
@@ -374,7 +397,7 @@ function DetailedOrientedSection() {
       <SectionTitleMarquee
         leftWord="DETAILED"
         rightWord="ORIENTED"
-        labels={["EDUCATION", "TOOLS", "PERSONAL TASTE"]}
+        labels={["EDUCATION", "TOOL STACK", "CURRENT VIBE"]}
       />
 
       <div className="mt-12 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6">
@@ -387,7 +410,7 @@ function DetailedOrientedSection() {
                   <div className="text-sm text-gray-500 mono-label">{item.period}</div>
                   <div>
                     <p className="text-white font-medium text-base md:text-lg">{item.title}</p>
-                    <p className="mt-1 text-gray-400 text-sm md:text-base">{item.school}</p>
+                    <p className="mt-1 text-gray-400 text-sm md:text-base leading-relaxed">{item.school}</p>
                   </div>
                 </div>
               ))}
@@ -396,13 +419,16 @@ function DetailedOrientedSection() {
 
           <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 md:p-8">
             <h3 className="mb-8 text-xl md:text-2xl font-semibold text-white">Tool stack</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {toolStack.map((tool) => (
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+              {tools.map((tool) => (
                 <div
-                  key={tool}
-                  className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-center text-sm text-white/85"
+                  key={tool.label}
+                  className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 flex flex-col items-center justify-center text-center"
                 >
-                  {tool}
+                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-cyan-400/20 to-fuchsia-500/20 border border-white/10 flex items-center justify-center text-sm font-semibold text-white">
+                    {tool.short}
+                  </div>
+                  <span className="mt-2 text-[11px] text-white/75">{tool.label}</span>
                 </div>
               ))}
             </div>
@@ -410,7 +436,7 @@ function DetailedOrientedSection() {
         </div>
 
         <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 md:p-8">
-          <p className="mb-4 mono-label text-cyan-300">PERSONAL TASTE</p>
+          <p className="mb-4 mono-label text-cyan-300">CURRENT VIBE</p>
           <h3 className="text-2xl md:text-3xl font-semibold text-white leading-tight">
             Calm, focused, detail-driven.
           </h3>
@@ -420,23 +446,27 @@ function DetailedOrientedSection() {
           </p>
 
           <div className="mt-8 space-y-4">
-            <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-              <p className="text-xs mono-label text-cyan-300 mb-2">CURRENT VIBE</p>
-              <p className="text-white font-medium text-lg">The Night We Met</p>
-              <p className="text-white/55 text-sm mt-1">Lord Huron</p>
-            </div>
+            {songs.map((song, index) => (
+              <div key={index} className="rounded-2xl border border-white/10 bg-black/30 p-5">
+                <p className="text-xs mono-label text-cyan-300 mb-2">{song.title}</p>
+                <p className="text-white font-medium text-lg">{song.artist}</p>
+                <div className="mt-4">
+                  <a
+                    href={song.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white text-black px-5 py-2 text-sm hover:bg-gray-100 transition"
+                  >
+                    Open on Spotify <ExternalLink size={14} />
+                  </a>
+                </div>
+              </div>
+            ))}
 
             <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
               <p className="text-xs mono-label text-cyan-300 mb-2">WORK STYLE</p>
               <p className="text-white/80 text-sm leading-7">
                 Structured thinking, visual clarity, operational logic, and patience when building something properly.
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-              <p className="text-xs mono-label text-cyan-300 mb-2">WHAT I VALUE</p>
-              <p className="text-white/80 text-sm leading-7">
-                Real-world usefulness, clean interfaces, strong systems, and thoughtful execution.
               </p>
             </div>
           </div>
@@ -452,20 +482,32 @@ function AboutSection() {
       period: "2021 — 2025",
       title: "Co-founder, Technical Director",
       company: "AO Digital (Tangier)",
-      link: "#",
-      remote: false,
-      note: "Digital solutions & data-driven services for aquaculture and marine-related companies",
+      note: "Digital solutions and data-driven services for aquaculture, marine businesses, and companies from other sectors.",
     },
-    { period: "2020", title: "Web apps project manager", company: "Mainroc (Digital solutions company)", link: "#", remote: false },
-    { period: "2019", title: "Internship — Production Department (4 months)", company: "Aqua Mdiq (Marine aquaculture)", link: "#", remote: false },
+    {
+      period: "2020",
+      title: "Web apps project manager",
+      company: "Mainroc",
+      note: "Managed digital products, operational interfaces, and web-based tools for business needs.",
+    },
+    {
+      period: "2019",
+      title: "Internship — Production Department (4 months)",
+      company: "Aqua Mdiq",
+      note: "Hands-on exposure to marine aquaculture production workflows and farm activity.",
+    },
     {
       period: "2018",
       title: "Internship — Sewage treatment plant (2 months)",
-      company: "Amendis (Electricity, water supply, wastewater management)",
-      link: "#",
-      remote: false,
+      company: "Amendis",
+      note: "Worked around water systems, environmental monitoring, and treatment operations.",
     },
-    { period: "2017", title: "Head of sector", company: "Sieta Boughaz (Urban sanitation & environmental services)", link: "#", remote: false },
+    {
+      period: "2017",
+      title: "Head of sector",
+      company: "Sieta Boughaz",
+      note: "Operational responsibility in sanitation and environmental service activities.",
+    },
   ];
 
   return (
@@ -498,10 +540,11 @@ function AboutSection() {
           <div className="bg-[#141414] rounded-2xl p-6 md:p-8 mb-6 md:mb-8">
             <p className="text-base md:text-lg leading-relaxed text-white/90">
               With a strong background in <span className="text-white">aquaculture</span> and hands-on experience in
-              marine and farm environments, I combine practical field work with technical and monitoring skills. I’ve
-              worked closely with aquaculture farms supporting daily operations such as stock monitoring, harvesting,
-              site visits, and farm maintenance. I adapt easily to field conditions, work effectively with farm teams,
-              and contribute reliably to production activities.
+              marine and farm environments, I combine practical field work with <span className="text-white">web app
+              building, digital strategy, monitoring logic, and product structuring</span>. I’ve worked closely with
+              aquaculture farms on daily operations such as stock monitoring, harvesting, site visits, and farm
+              maintenance, while also designing digital systems and growth strategies that help businesses operate with
+              more visibility, structure, and efficiency.
             </p>
           </div>
 
@@ -515,20 +558,11 @@ function AboutSection() {
 
                   <div>
                     <p className="font-medium text-sm md:text-base text-white">{exp.title}</p>
-
-                    <div className="flex flex-col gap-1 mt-1">
-                      <div className="flex items-center gap-2">
-                        <Link href={exp.link} className="text-sm text-gray-400 underline hover:text-white transition-colors">
-                          {exp.company}
-                        </Link>
-                        {exp.remote && <span className="text-xs px-2 py-0.5 bg-[#1f1f1f] rounded text-gray-400">Remote</span>}
-                      </div>
-
-                      {"note" in exp && (exp as any).note ? (
-                        <p className="text-xs text-gray-500 leading-relaxed max-w-[56ch]">
-                          {(exp as any).note}
-                        </p>
-                      ) : null}
+                    <div className="mt-1">
+                      <p className="text-sm text-gray-400">{exp.company}</p>
+                      <p className="text-xs text-gray-500 leading-relaxed max-w-[56ch] mt-1">
+                        {exp.note}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -542,7 +576,7 @@ function AboutSection() {
                 <li>On-site visits: fish health, behavior, and environmental conditions</li>
                 <li>Harvest support: preparation and assistance during live harvests</li>
                 <li>Stock counting, grading, and basic biomass estimation</li>
-                <li>Water quality checks (temperature, oxygen) and production monitoring support</li>
+                <li>Water quality checks and production monitoring support</li>
               </ul>
             </div>
           </div>
@@ -571,12 +605,13 @@ function AboutSection() {
             <h4 className="mono-label text-gray-400 mb-6">MY BACKGROUND</h4>
             <div className="space-y-4 text-sm text-gray-300 leading-relaxed">
               <p>
-                I bridge <span className="text-white">aquaculture operations</span> and{" "}
-                <span className="text-white">digital solutions</span> — combining field experience with a technical mindset to improve monitoring,
-                reporting, and day-to-day execution on farms.
+                I move naturally between <span className="text-white">operations</span>,{" "}
+                <span className="text-white">digital systems</span>, and{" "}
+                <span className="text-white">strategy execution</span>.
               </p>
               <p>
-                My focus is simple: be reliable on-site, understand real farm constraints, and help teams make decisions with better data.
+                My strength is understanding real work on the ground, then translating it into cleaner processes,
+                better interfaces, and more structured digital solutions.
               </p>
             </div>
 
@@ -603,9 +638,39 @@ function Footer() {
           </button>
         </div>
 
-        <div className="text-center text-sm text-gray-400">
-          <p>© 2026 · Otmane Joual</p>
-          <p className="mono-label text-gray-600">ALL RIGHTS RESERVED</p>
+        <div className="grid gap-4 md:grid-cols-3 text-sm text-gray-400 border-t border-white/10 pt-8">
+          <div className="space-y-3">
+            <p className="text-white font-medium">Otmane Joual</p>
+            <p className="mono-label text-gray-600">DIGITAL · AQUACULTURE · SYSTEMS</p>
+          </div>
+
+          <div className="space-y-3">
+            <div className="flex items-start gap-3">
+              <Mail size={16} className="mt-0.5 text-white/70" />
+              <a href="mailto:otman.jowal@gmail.com" className="hover:text-white transition-colors">
+                otman.jowal@gmail.com
+              </a>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <Facebook size={16} className="mt-0.5 text-white/70" />
+              <a
+                href="https://www.facebook.com/otman.joual/"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                Facebook page
+              </a>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <div className="flex items-start gap-3">
+              <MapPin size={16} className="mt-0.5 text-white/70" />
+              <span>Lugna gatan 46 B, 21160 Malmö</span>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
@@ -649,30 +714,23 @@ export default function Home() {
           "The platform centralizes farm activity across all production stages including phytoplankton culture, hatchery monitoring, grow-out park supervision, purification workflows, harvest planning, logistics, and production analytics. Main modules include real-time environmental monitoring, larval survival tracking, biomass and occupancy dashboards, operational task assignment, maintenance logs, quality control workflows, harvest forecasting, traceability records, and distribution management. Beyond the digital side, I also managed to spend time inside the farm environment and monitor parts of the production workflow directly, which gave me a practical foundation in the operational field. This helped shape the platform around real production visibility needs, reporting structure, and day-to-day operational logic.",
         role:
           "Product design, aquaculture operations structuring, production workflow mapping, and digital system architecture.",
-        tools: [
-          "React",
-          "Vite",
-          "Tailwind CSS",
-          "React",
-          "Netlify",
-          "Supabase"
-        ],
+        tools: ["React", "Vite", "Tailwind CSS", "React", "Netlify", "Supabase"],
         features: [
           "Hatchery and phytoplankton workflow visibility",
           "Grow-out park supervision",
           "Purification and quality control tracking",
           "Harvest planning and forecasting",
           "Traceability and distribution records",
-          "Live KPI dashboards and structured reporting"
+          "Live KPI dashboards and structured reporting",
         ],
         gallery: [
           "/images/azura-1.png",
           "/images/azura-2.png",
           "/images/azura-3.png",
-          "/images/azura-4.png"
+          "/images/azura-4.png",
         ],
         liveUrl: "https://azura-group.com/activite/aquaculture/",
-        buttonLabel: "Azura"
+        buttonLabel: "Azura",
       });
       return;
     }
@@ -689,23 +747,18 @@ export default function Home() {
           "The project involved building a 360° digital growth approach, starting from the design and creation of a dedicated e-commerce section for the aquaculture product line, and extending to the full digital acquisition strategy across multiple channels. This included planning how traffic would be generated through organic social media, paid advertising, SEO optimization, and digital content positioning, with the objective of turning digital presence into a commercial channel for seafood product visibility and sales.",
         role:
           "Digital strategy development, e-commerce structuring, acquisition channel planning, and digital positioning for aquaculture products.",
-        tools: [
-          "Meta Ads",
-          "Google Analytics",
-          "SEO",
-          "E-commerce Strategy"
-        ],
+        tools: ["Meta Ads", "Google Analytics", "SEO", "E-commerce Strategy"],
         features: [
           "Aquaculture product e-commerce page",
           "Meta traffic acquisition planning",
           "Google Analytics monitoring",
           "SEO product positioning",
           "Social media campaign architecture",
-          "Digital sales funnel design"
+          "Digital sales funnel design",
         ],
         gallery: ["/images/lesdomaines-1.png"],
         liveUrl: "https://rabat.boutiquelesdomaines.ma/poissonnerie-4",
-        buttonLabel: "Les Domaines"
+        buttonLabel: "Les Domaines",
       });
       return;
     }
@@ -729,15 +782,15 @@ export default function Home() {
           "Mortality logging",
           "Environmental metrics tracking",
           "Risk / watch / good status system",
-          "Fast navigation between cages"
+          "Fast navigation between cages",
         ],
         gallery: [
           "/images/aquaops-1.png",
           "/images/aquaops-2.png",
           "/images/aquaops-3.png",
           "/images/aquaops-4.png",
-          "/images/aquaops-5.png"
-        ]
+          "/images/aquaops-5.png",
+        ],
       });
       return;
     }
@@ -754,28 +807,23 @@ export default function Home() {
           "The platform brings together storefront creation, supplier synchronization, dropshipping logistics, order management, and payment workflows in one system, helping users launch and manage online businesses with less operational friction. Main features included product import automation, inventory synchronization, order tracking, cash-on-delivery management, customer communication workflows, and logistics coordination. The platform also integrated growth tools such as SEO modules, WhatsApp sales support, affiliate systems, referral logic, and flexible sales features adapted to local market realities.",
         role:
           "Product structuring, digital workflow design, commerce operations logic, and platform growth strategy.",
-        tools: [
-          "E-commerce Logic",
-          "Automation",
-          "SEO",
-          "WhatsApp Workflows"
-        ],
+        tools: ["E-commerce Logic", "Automation", "SEO", "WhatsApp Workflows"],
         features: [
           "Storefront creation",
           "Supplier synchronization",
           "Dropshipping logistics",
           "Order and payment workflows",
           "Affiliate and referral systems",
-          "SEO and customer communication tools"
+          "SEO and customer communication tools",
         ],
         gallery: [
           "/images/ecomya-1.png",
           "/images/ecomya-2.png",
           "/images/ecomya-3.png",
-          "/images/ecomya-4.png"
+          "/images/ecomya-4.png",
         ],
         liveUrl: "https://ecomya.services/en/",
-        buttonLabel: "Ecomya"
+        buttonLabel: "Ecomya",
       });
       return;
     }
@@ -792,23 +840,18 @@ export default function Home() {
           "The work focused on maintaining a clear and structured web presence that presents terminal services, operational information, customer access points, and corporate communication in an accessible way. The website includes integrations for customer-facing tools such as track-and-trace, vessel schedules, and gate appointment access, allowing operational services to remain easily reachable inside the website ecosystem. Social media communication and analytics tracking were also managed to improve visibility, engagement, and digital performance across channels. The operational tracking tools themselves were not built by us — our role was to integrate them seamlessly into the digital experience.",
         role:
           "Website development, digital communication, analytics monitoring, and operational tool integration.",
-        tools: [
-          "Website Development",
-          "Analytics",
-          "Social Media",
-          "Tool Integration"
-        ],
+        tools: ["Website Development", "Analytics", "Social Media", "Tool Integration"],
         features: [
           "Corporate website structuring",
           "Track-and-trace integration",
           "Vessel schedule access",
           "Gate appointment access",
           "Social media management",
-          "Digital performance monitoring"
+          "Digital performance monitoring",
         ],
         gallery: ["/images/apm-1.png"],
         liveUrl: "#",
-        buttonLabel: "APM Terminals Tangier"
+        buttonLabel: "APM Terminals Tangier",
       });
       return;
     }
@@ -822,23 +865,17 @@ export default function Home() {
         "Worked on the digital presence of Mövenpick Tangier through webpage development, social media management, and SEO optimization.",
       longDescription:
         "The work focused on improving how the hotel property was presented online, with attention to user experience, destination visibility, and booking-oriented content. The page highlights the hotel’s location overlooking the Bay of Tangier, its accommodation offer, business facilities, gardens, pool, and proximity to the city center. In parallel, social media communication was managed to maintain a consistent hospitality-focused brand presence, while SEO work improved discoverability and search relevance. The overall objective was to connect content, visibility, and booking intent within a coherent digital presence.",
-      role:
-        "Web content structuring, social media management, and SEO execution.",
-      tools: [
-        "SEO",
-        "Web Content",
-        "Social Media",
-        "Hospitality Positioning"
-      ],
+      role: "Web content structuring, social media management, and SEO execution.",
+      tools: ["SEO", "Web Content", "Social Media", "Hospitality Positioning"],
       features: [
         "Hotel page development",
         "Destination-focused content",
         "SEO optimization",
         "Social media communication",
         "Booking-oriented structure",
-        "Brand visibility support"
+        "Brand visibility support",
       ],
-      gallery: []
+      gallery: [],
     });
   };
 

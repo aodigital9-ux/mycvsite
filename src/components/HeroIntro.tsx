@@ -6,7 +6,7 @@ export default function HeroIntro() {
   return (
     <section className="relative min-h-screen overflow-hidden bg-[#0a0a0a] pt-24 md:pt-28">
       <div className="absolute inset-0">
-        <div className="absolute inset-0 scale-[1.02] md:scale-[0.92]">
+        <div className="absolute inset-0 scale-[0.78] md:scale-[0.72]">
           <Image
             src="/images/about-otmane.png"
             alt="Otmane Joual portrait"
@@ -20,7 +20,7 @@ export default function HeroIntro() {
 
       <div className="relative z-10 flex min-h-[88vh] flex-col items-center justify-center px-4 text-center">
         <p className="mono-label mb-6 text-xs md:text-sm tracking-[0.35em] text-white/70">
-          AQUACULTURE · DIGITAL SYSTEMS · PRODUCT THINKING
+          DIGITAL STRATEGIES · AQUACULTURE PRODUCTION · SYSTEM DESIGN
         </p>
 
         <h1 className="max-w-5xl text-6xl font-semibold tracking-[-0.06em] text-white sm:text-7xl md:text-[120px] md:leading-[0.92]">
