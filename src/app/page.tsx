@@ -372,18 +372,18 @@ function DetailedOrientedSection() {
 
   const songs = [
     {
-      title: "Current vibe 01",
-      artist: "Spotify pick",
+      title: "99 Luftballons",
+      artist: "NENA",
       url: "https://open.spotify.com/track/2IJftBfq7pJ43tfnOR0RB3?si=ytTjSX2kRzmwHWpE1inh7g%0A",
     },
     {
-      title: "Current vibe 02",
-      artist: "Spotify pick",
+      title: "Ana Nagm",
+      artist: "Cairokee",
       url: "https://open.spotify.com/track/6CU68VwcV10VfulVQMfj3X?si=OR4VDJhPTI6XeW7A6mevbw",
     },
     {
-      title: "Current vibe 03",
-      artist: "Spotify pick",
+      title: "Forever in love",
+      artist: "Kenny G",
       url: "https://open.spotify.com/track/13cpOnmccZGVGFngLxYN4I?si=X4fgQyU2S0mx3miyFqoWpA",
     },
   ];
