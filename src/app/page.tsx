@@ -4,7 +4,15 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { Mail, MapPin, Facebook, ExternalLink } from "lucide-react";
+import {
+  Mail,
+  MapPin,
+  Facebook,
+  ExternalLink,
+  Play,
+  Music2,
+  Headphones,
+} from "lucide-react";
 import HeroIntro from "@/components/HeroIntro";
 import ProjectModal from "@/components/ProjectModal";
 
@@ -18,7 +26,7 @@ function PinkAsterisk({ className = "" }: { className?: string }) {
 
 function Navigation() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-end px-4 md:px-8 py-4 md:py-6 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/5">
+    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-end px-4 md:px-8 py-4 md:py-6 bg-[#08111b]/80 backdrop-blur-md border-b border-white/5">
       <div className="hidden md:flex items-center gap-8">
         <Link href="#about" className="mono-label text-gray-400 hover:text-white transition-colors">
           About me
@@ -39,7 +47,7 @@ function Sidebar() {
     <div className="hidden md:flex fixed right-0 top-1/2 -translate-y-1/2 z-40 flex-col">
       <button className="bg-white text-black px-3 py-4 font-bold text-sm rounded-l-lg">W.</button>
       <button
-        className="bg-[#1a1a1a] text-white px-3 py-4 text-xs mono-label rounded-bl-lg"
+        className="bg-[#131a2b] text-white px-3 py-4 text-xs mono-label rounded-bl-lg"
         style={{ writingMode: "vertical-rl" }}
       >
         Honors
@@ -58,9 +66,9 @@ function SectionTitleMarquee({
   labels: string[];
 }) {
   return (
-    <div className="relative overflow-hidden py-8 md:py-10 border-y border-[#1f1f1f]">
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10" />
+    <div className="relative overflow-hidden py-8 md:py-10 border-y border-[#1b2435]">
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-[#08111b] to-transparent z-10" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-[#08111b] to-transparent z-10" />
 
       <div className="flex whitespace-nowrap">
         <div className="section-marquee-track flex items-center gap-10 pr-10">
@@ -68,7 +76,7 @@ function SectionTitleMarquee({
             <div key={i} className="flex items-center gap-10">
               <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">{rightWord}</span>
               <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
-              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-[#121c28]">{leftWord}</span>
+              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-[#14243d]">{leftWord}</span>
               <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
               <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">{rightWord}</span>
               <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
@@ -81,7 +89,7 @@ function SectionTitleMarquee({
             <div key={i} className="flex items-center gap-10">
               <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">{rightWord}</span>
               <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
-              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-[#121c28]">{leftWord}</span>
+              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-[#14243d]">{leftWord}</span>
               <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
               <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">{rightWord}</span>
               <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
@@ -154,7 +162,7 @@ function WorkCard({
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -10 }}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      className="group relative cursor-pointer rounded-2xl overflow-hidden bg-[#0c1324] border border-cyan-400/10 shadow-[0_30px_80px_rgba(0,0,0,0.55)]"
+      className="group relative cursor-pointer rounded-2xl overflow-hidden bg-[#0f1726] border border-cyan-400/10 shadow-[0_30px_80px_rgba(0,0,0,0.55)]"
     >
       <motion.div
         className="pointer-events-none absolute inset-0 rounded-2xl"
@@ -186,7 +194,7 @@ function WorkCard({
           <Image src={image} alt={title} fill className="object-cover opacity-70" />
         </motion.div>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-[#07111f]/90 via-black/25 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#08111b]/90 via-black/25 to-transparent" />
 
         <motion.div
           className="pointer-events-none absolute inset-0"
@@ -356,18 +364,79 @@ function DetailedOrientedSection() {
   ];
 
   const tools = [
-    { short: "Fg", label: "Figma" },
-    { short: "Fr", label: "Framer" },
-    { short: "Re", label: "React" },
-    { short: "TS", label: "TypeScript" },
-    { short: "VS", label: "Visual Studio" },
-    { short: "NL", label: "Netlify" },
-    { short: "SB", label: "Supabase" },
-    { short: "TW", label: "Tailwind" },
-    { short: "No", label: "Notion" },
-    { short: "VN", label: "VN" },
-    { short: "Br", label: "Brave" },
-    { short: "GIS", label: "GIS" },
+    {
+      short: "Fg",
+      label: "Figma",
+      bg: "from-[#ff6b6b] via-[#f06595] to-[#845ef7]",
+      ring: "border-pink-300/30",
+    },
+    {
+      short: "Fr",
+      label: "Framer",
+      bg: "from-[#1d4ed8] to-[#312e81]",
+      ring: "border-blue-300/30",
+    },
+    {
+      short: "Re",
+      label: "React",
+      bg: "from-[#06b6d4] to-[#2563eb]",
+      ring: "border-cyan-300/30",
+    },
+    {
+      short: "TS",
+      label: "TypeScript",
+      bg: "from-[#2563eb] to-[#1d4ed8]",
+      ring: "border-blue-300/30",
+    },
+    {
+      short: "VS",
+      label: "Visual Studio",
+      bg: "from-[#2563eb] to-[#0ea5e9]",
+      ring: "border-sky-300/30",
+    },
+    {
+      short: "NL",
+      label: "Netlify",
+      bg: "from-[#14b8a6] to-[#0f766e]",
+      ring: "border-teal-300/30",
+    },
+    {
+      short: "SB",
+      label: "Supabase",
+      bg: "from-[#22c55e] to-[#15803d]",
+      ring: "border-green-300/30",
+    },
+    {
+      short: "TW",
+      label: "Tailwind",
+      bg: "from-[#22d3ee] to-[#0891b2]",
+      ring: "border-cyan-300/30",
+    },
+    {
+      short: "No",
+      label: "Notion",
+      bg: "from-[#ffffff] to-[#d4d4d8]",
+      ring: "border-white/30",
+      textDark: true,
+    },
+    {
+      short: "VN",
+      label: "VN",
+      bg: "from-[#374151] to-[#111827]",
+      ring: "border-gray-300/20",
+    },
+    {
+      short: "Br",
+      label: "Brave",
+      bg: "from-[#f97316] to-[#ea580c]",
+      ring: "border-orange-300/30",
+    },
+    {
+      short: "GIS",
+      label: "GIS",
+      bg: "from-[#84cc16] to-[#166534]",
+      ring: "border-lime-300/30",
+    },
   ];
 
   const songs = [
@@ -375,16 +444,19 @@ function DetailedOrientedSection() {
       title: "99 Luftballons",
       artist: "NENA",
       url: "https://open.spotify.com/track/2IJftBfq7pJ43tfnOR0RB3?si=ytTjSX2kRzmwHWpE1inh7g%0A",
+      accent: "from-[#1DB954]/30 to-transparent",
     },
     {
       title: "Ana Nagm",
       artist: "Cairokee",
       url: "https://open.spotify.com/track/6CU68VwcV10VfulVQMfj3X?si=OR4VDJhPTI6XeW7A6mevbw",
+      accent: "from-[#1DB954]/30 to-transparent",
     },
     {
-      title: "Forever in love",
+      title: "Forever in Love",
       artist: "Kenny G",
       url: "https://open.spotify.com/track/13cpOnmccZGVGFngLxYN4I?si=X4fgQyU2S0mx3miyFqoWpA",
+      accent: "from-[#1DB954]/30 to-transparent",
     },
   ];
 
@@ -400,9 +472,9 @@ function DetailedOrientedSection() {
         labels={["EDUCATION", "TOOL STACK", "CURRENT VIBE"]}
       />
 
-      <div className="mt-12 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6">
+      <div className="mt-12 grid grid-cols-1 lg:grid-cols-[1.08fr_0.92fr] gap-6">
         <div className="space-y-6">
-          <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 md:p-8">
+          <div className="rounded-[28px] border border-white/10 bg-[#101827]/90 p-6 md:p-8 shadow-[0_10px_40px_rgba(0,0,0,0.25)]">
             <h3 className="mb-8 text-xl md:text-2xl font-semibold text-white">Education</h3>
             <div className="space-y-8">
               {education.map((item, index) => (
@@ -417,16 +489,20 @@ function DetailedOrientedSection() {
             </div>
           </div>
 
-          <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 md:p-8">
+          <div className="rounded-[28px] border border-white/10 bg-[#101827]/90 p-6 md:p-8 shadow-[0_10px_40px_rgba(0,0,0,0.25)]">
             <h3 className="mb-8 text-xl md:text-2xl font-semibold text-white">Tool stack</h3>
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
               {tools.map((tool) => (
                 <div
                   key={tool.label}
-                  className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 flex flex-col items-center justify-center text-center"
+                  className="rounded-2xl border border-white/8 bg-white/[0.03] p-3 flex flex-col items-center justify-center text-center hover:bg-white/[0.05] transition"
                 >
-                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-cyan-400/20 to-fuchsia-500/20 border border-white/10 flex items-center justify-center text-sm font-semibold text-white">
-                    {tool.short}
+                  <div
+                    className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${tool.bg} ${tool.ring} border flex items-center justify-center shadow-[0_10px_25px_rgba(0,0,0,0.25)]`}
+                  >
+                    <span className={`text-sm font-semibold ${tool.textDark ? "text-black" : "text-white"}`}>
+                      {tool.short}
+                    </span>
                   </div>
                   <span className="mt-2 text-[11px] text-white/75">{tool.label}</span>
                 </div>
@@ -435,8 +511,8 @@ function DetailedOrientedSection() {
           </div>
         </div>
 
-        <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 md:p-8">
-          <p className="mb-4 mono-label text-cyan-300">CURRENT VIBE</p>
+        <div className="rounded-[28px] border border-white/10 bg-[#101827]/90 p-6 md:p-8 shadow-[0_10px_40px_rgba(0,0,0,0.25)]">
+          <p className="mb-4 mono-label text-[#1DB954]">CURRENT VIBE</p>
           <h3 className="text-2xl md:text-3xl font-semibold text-white leading-tight">
             Calm, focused, detail-driven.
           </h3>
@@ -447,23 +523,42 @@ function DetailedOrientedSection() {
 
           <div className="mt-8 space-y-4">
             {songs.map((song, index) => (
-              <div key={index} className="rounded-2xl border border-white/10 bg-black/30 p-5">
-                <p className="text-xs mono-label text-cyan-300 mb-2">{song.title}</p>
-                <p className="text-white font-medium text-lg">{song.artist}</p>
-                <div className="mt-4">
-                  <a
-                    href={song.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white text-black px-5 py-2 text-sm hover:bg-gray-100 transition"
-                  >
-                    Open on Spotify <ExternalLink size={14} />
-                  </a>
+              <div
+                key={index}
+                className="relative overflow-hidden rounded-[24px] border border-white/10 bg-[#0b1220] p-5"
+              >
+                <div className={`pointer-events-none absolute inset-0 bg-gradient-to-r ${song.accent}`} />
+                <div className="relative">
+                  <div className="flex items-center gap-4">
+                    <div className="h-16 w-16 rounded-2xl bg-[#1DB954] flex items-center justify-center shadow-[0_12px_28px_rgba(29,185,84,0.25)]">
+                      <Music2 size={28} className="text-black" />
+                    </div>
+
+                    <div className="min-w-0 flex-1">
+                      <p className="text-white font-semibold text-lg truncate">{song.title}</p>
+                      <p className="text-white/55 text-sm">{song.artist}</p>
+
+                      <div className="mt-3 flex items-center gap-2 text-white/45">
+                        <Headphones size={14} />
+                        <span className="text-xs mono-label">Spotify</span>
+                      </div>
+                    </div>
+
+                    <a
+                      href={song.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="shrink-0 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-black hover:bg-gray-100 transition"
+                    >
+                      <Play size={14} fill="currentColor" />
+                      Open
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}
 
-            <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
+            <div className="rounded-[24px] border border-white/10 bg-[#0b1220] p-5">
               <p className="text-xs mono-label text-cyan-300 mb-2">WORK STYLE</p>
               <p className="text-white/80 text-sm leading-7">
                 Structured thinking, visual clarity, operational logic, and patience when building something properly.
@@ -516,7 +611,7 @@ function AboutSection() {
         <PinkAsterisk className="w-5 h-5 md:w-6 md:h-6" />
       </div>
 
-      <div className="overflow-hidden py-6 md:py-8 border-y border-[#1f1f1f] mb-12 md:mb-16">
+      <div className="overflow-hidden py-6 md:py-8 border-y border-[#1b2435] mb-12 md:mb-16">
         <div className="flex animate-marquee whitespace-nowrap">
           {[...Array(4)].map((_, i) => (
             <div key={i} className="flex items-center gap-4 md:gap-8 mx-4 md:mx-8">
@@ -537,7 +632,7 @@ function AboutSection() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
         <div>
-          <div className="bg-[#141414] rounded-2xl p-6 md:p-8 mb-6 md:mb-8">
+          <div className="bg-[#101827] rounded-2xl p-6 md:p-8 mb-6 md:mb-8">
             <p className="text-base md:text-lg leading-relaxed text-white/90">
               With a strong background in <span className="text-white">aquaculture</span> and hands-on experience in
               marine and farm environments, I combine practical field work with <span className="text-white">web app
@@ -548,7 +643,7 @@ function AboutSection() {
             </p>
           </div>
 
-          <div className="bg-[#141414] rounded-2xl p-6 md:p-8">
+          <div className="bg-[#101827] rounded-2xl p-6 md:p-8">
             <h4 className="mono-label text-gray-400 mb-6">EXPERIENCE</h4>
 
             <div className="space-y-5 md:space-y-6">
@@ -601,7 +696,7 @@ function AboutSection() {
             />
           </div>
 
-          <div className="bg-[#141414] rounded-2xl p-6 md:p-8">
+          <div className="bg-[#101827] rounded-2xl p-6 md:p-8">
             <h4 className="mono-label text-gray-400 mb-6">MY BACKGROUND</h4>
             <div className="space-y-4 text-sm text-gray-300 leading-relaxed">
               <p>
@@ -625,7 +720,7 @@ function AboutSection() {
 
 function Footer() {
   return (
-    <footer className="px-4 md:px-8 py-12 md:py-16 border-t border-[#1f1f1f]">
+    <footer className="px-4 md:px-8 py-12 md:py-16 border-t border-[#1b2435]">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-end mb-12 md:mb-16">
           <button
@@ -881,7 +976,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="min-h-screen bg-[#0a0a0a]">
+      <main className="min-h-screen bg-[#08111b]">
         <Navigation />
         <Sidebar />
         <HeroIntro />
