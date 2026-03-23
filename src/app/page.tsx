@@ -26,15 +26,15 @@ function PinkAsterisk({ className = "" }: { className?: string }) {
 
 function Navigation() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-end px-4 md:px-8 py-4 md:py-6 bg-[#08111b]/80 backdrop-blur-md border-b border-white/5">
+    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-end px-4 md:px-8 py-4 md:py-6 bg-[#0f1726]/70 backdrop-blur-md border-b border-white/10">
       <div className="hidden md:flex items-center gap-8">
-        <Link href="#about" className="mono-label text-gray-400 hover:text-white transition-colors">
+        <Link href="#about" className="mono-label text-gray-300 hover:text-white transition-colors">
           About me
         </Link>
-        <Link href="#featured-projects" className="mono-label text-gray-400 hover:text-white transition-colors">
+        <Link href="#featured-projects" className="mono-label text-gray-300 hover:text-white transition-colors">
           Featured projects
         </Link>
-        <Link href="#detailed-oriented" className="mono-label text-gray-400 hover:text-white transition-colors">
+        <Link href="#detailed-oriented" className="mono-label text-gray-300 hover:text-white transition-colors">
           Detailed oriented
         </Link>
       </div>
@@ -47,7 +47,7 @@ function Sidebar() {
     <div className="hidden md:flex fixed right-0 top-1/2 -translate-y-1/2 z-40 flex-col">
       <button className="bg-white text-black px-3 py-4 font-bold text-sm rounded-l-lg">W.</button>
       <button
-        className="bg-[#131a2b] text-white px-3 py-4 text-xs mono-label rounded-bl-lg"
+        className="bg-[#1a2336] text-white px-3 py-4 text-xs mono-label rounded-bl-lg"
         style={{ writingMode: "vertical-rl" }}
       >
         Honors
@@ -66,19 +66,19 @@ function SectionTitleMarquee({
   labels: string[];
 }) {
   return (
-    <div className="relative overflow-hidden py-8 md:py-10 border-y border-[#1b2435]">
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-[#08111b] to-transparent z-10" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-[#08111b] to-transparent z-10" />
+    <div className="relative overflow-hidden py-8 md:py-10 border-y border-[#28344c]">
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-[#101a2b] to-transparent z-10" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-[#101a2b] to-transparent z-10" />
 
       <div className="flex whitespace-nowrap">
         <div className="section-marquee-track flex items-center gap-10 pr-10">
           {Array.from({ length: 8 }).map((_, i) => (
             <div key={i} className="flex items-center gap-10">
-              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">{rightWord}</span>
+              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white/95">{rightWord}</span>
               <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
-              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-[#14243d]">{leftWord}</span>
+              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-[#26466d]">{leftWord}</span>
               <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
-              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">{rightWord}</span>
+              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white/95">{rightWord}</span>
               <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
             </div>
           ))}
@@ -87,11 +87,11 @@ function SectionTitleMarquee({
         <div className="section-marquee-track flex items-center gap-10 pr-10" aria-hidden="true">
           {Array.from({ length: 8 }).map((_, i) => (
             <div key={i} className="flex items-center gap-10">
-              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">{rightWord}</span>
+              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white/95">{rightWord}</span>
               <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
-              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-[#14243d]">{leftWord}</span>
+              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-[#26466d]">{leftWord}</span>
               <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
-              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white">{rightWord}</span>
+              <span className="font-bold tracking-tight text-[clamp(72px,14vw,220px)] text-white/95">{rightWord}</span>
               <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
             </div>
           ))}
@@ -99,7 +99,7 @@ function SectionTitleMarquee({
       </div>
 
       <div className="mt-4 px-4 md:px-8">
-        <div className="flex flex-wrap items-center justify-between gap-6 text-xs mono-label text-gray-500">
+        <div className="flex flex-wrap items-center justify-between gap-6 text-xs mono-label text-gray-400">
           <span>{labels[0] ?? ""}</span>
           <span>{labels[1] ?? ""}</span>
           <span>{labels[2] ?? ""}</span>
@@ -162,7 +162,7 @@ function WorkCard({
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -10 }}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      className="group relative cursor-pointer rounded-2xl overflow-hidden bg-[#0f1726] border border-cyan-400/10 shadow-[0_30px_80px_rgba(0,0,0,0.55)]"
+      className="group relative cursor-pointer rounded-2xl overflow-hidden bg-[#162235] border border-cyan-300/15 shadow-[0_30px_80px_rgba(0,0,0,0.35)]"
     >
       <motion.div
         className="pointer-events-none absolute inset-0 rounded-2xl"
@@ -171,17 +171,17 @@ function WorkCard({
         transition={{ duration: 0.25 }}
         style={{
           boxShadow:
-            "inset 0 0 0 1px rgba(103,232,249,0.20), 0 0 60px rgba(0,200,255,0.08)",
+            "inset 0 0 0 1px rgba(125,211,252,0.24), 0 0 60px rgba(56,189,248,0.10)",
         }}
       />
 
       <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_45%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.16),transparent_45%)]" />
       </div>
 
-      <div className="relative z-10 flex items-center justify-between px-5 md:px-6 py-4 bg-black/20 backdrop-blur-sm">
+      <div className="relative z-10 flex items-center justify-between px-5 md:px-6 py-4 bg-black/10 backdrop-blur-sm">
         <span className="text-white font-medium">{name}</span>
-        <span className="mono-label text-white/60">{year}</span>
+        <span className="mono-label text-white/70">{year}</span>
       </div>
 
       <div className="relative h-56 md:h-96 overflow-hidden">
@@ -191,10 +191,10 @@ function WorkCard({
           whileHover={{ scale: 1.06 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <Image src={image} alt={title} fill className="object-cover opacity-70" />
+          <Image src={image} alt={title} fill className="object-cover opacity-78" />
         </motion.div>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-[#08111b]/90 via-black/25 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#101a2b]/75 via-[#101a2b]/15 to-transparent" />
 
         <motion.div
           className="pointer-events-none absolute inset-0"
@@ -203,7 +203,7 @@ function WorkCard({
           transition={{ duration: 0.2 }}
           style={{
             background:
-              "radial-gradient(220px 180px at var(--sx) var(--sy), rgba(255,255,255,0.14), rgba(255,255,255,0) 60%)",
+              "radial-gradient(220px 180px at var(--sx) var(--sy), rgba(255,255,255,0.16), rgba(255,255,255,0) 60%)",
             ["--sx" as any]: shineX,
             ["--sy" as any]: shineY,
             mixBlendMode: "screen",
@@ -220,7 +220,7 @@ function WorkCard({
             {title}
           </motion.h3>
           <motion.p
-            className="text-xl md:text-3xl italic text-white/80"
+            className="text-xl md:text-3xl italic text-white/85"
             initial={{ y: 12, opacity: 0.85 }}
             whileHover={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.28 }}
@@ -364,79 +364,18 @@ function DetailedOrientedSection() {
   ];
 
   const tools = [
-    {
-      short: "Fg",
-      label: "Figma",
-      bg: "from-[#ff6b6b] via-[#f06595] to-[#845ef7]",
-      ring: "border-pink-300/30",
-    },
-    {
-      short: "Fr",
-      label: "Framer",
-      bg: "from-[#1d4ed8] to-[#312e81]",
-      ring: "border-blue-300/30",
-    },
-    {
-      short: "Re",
-      label: "React",
-      bg: "from-[#06b6d4] to-[#2563eb]",
-      ring: "border-cyan-300/30",
-    },
-    {
-      short: "TS",
-      label: "TypeScript",
-      bg: "from-[#2563eb] to-[#1d4ed8]",
-      ring: "border-blue-300/30",
-    },
-    {
-      short: "VS",
-      label: "Visual Studio",
-      bg: "from-[#2563eb] to-[#0ea5e9]",
-      ring: "border-sky-300/30",
-    },
-    {
-      short: "NL",
-      label: "Netlify",
-      bg: "from-[#14b8a6] to-[#0f766e]",
-      ring: "border-teal-300/30",
-    },
-    {
-      short: "SB",
-      label: "Supabase",
-      bg: "from-[#22c55e] to-[#15803d]",
-      ring: "border-green-300/30",
-    },
-    {
-      short: "TW",
-      label: "Tailwind",
-      bg: "from-[#22d3ee] to-[#0891b2]",
-      ring: "border-cyan-300/30",
-    },
-    {
-      short: "No",
-      label: "Notion",
-      bg: "from-[#ffffff] to-[#d4d4d8]",
-      ring: "border-white/30",
-      textDark: true,
-    },
-    {
-      short: "VN",
-      label: "VN",
-      bg: "from-[#374151] to-[#111827]",
-      ring: "border-gray-300/20",
-    },
-    {
-      short: "Br",
-      label: "Brave",
-      bg: "from-[#f97316] to-[#ea580c]",
-      ring: "border-orange-300/30",
-    },
-    {
-      short: "GIS",
-      label: "GIS",
-      bg: "from-[#84cc16] to-[#166534]",
-      ring: "border-lime-300/30",
-    },
+    { short: "Fg", label: "Figma", bg: "from-[#ff6b6b] via-[#f06595] to-[#845ef7]", ring: "border-pink-300/30" },
+    { short: "Fr", label: "Framer", bg: "from-[#1d4ed8] to-[#312e81]", ring: "border-blue-300/30" },
+    { short: "Re", label: "React", bg: "from-[#06b6d4] to-[#2563eb]", ring: "border-cyan-300/30" },
+    { short: "TS", label: "TypeScript", bg: "from-[#2563eb] to-[#1d4ed8]", ring: "border-blue-300/30" },
+    { short: "VS", label: "Visual Studio", bg: "from-[#2563eb] to-[#0ea5e9]", ring: "border-sky-300/30" },
+    { short: "NL", label: "Netlify", bg: "from-[#14b8a6] to-[#0f766e]", ring: "border-teal-300/30" },
+    { short: "SB", label: "Supabase", bg: "from-[#22c55e] to-[#15803d]", ring: "border-green-300/30" },
+    { short: "TW", label: "Tailwind", bg: "from-[#22d3ee] to-[#0891b2]", ring: "border-cyan-300/30" },
+    { short: "No", label: "Notion", bg: "from-[#ffffff] to-[#d4d4d8]", ring: "border-white/30", textDark: true },
+    { short: "VN", label: "VN", bg: "from-[#374151] to-[#111827]", ring: "border-gray-300/20" },
+    { short: "Br", label: "Brave", bg: "from-[#f97316] to-[#ea580c]", ring: "border-orange-300/30" },
+    { short: "GIS", label: "GIS", bg: "from-[#84cc16] to-[#166534]", ring: "border-lime-300/30" },
   ];
 
   const songs = [
@@ -474,49 +413,49 @@ function DetailedOrientedSection() {
 
       <div className="mt-12 grid grid-cols-1 lg:grid-cols-[1.08fr_0.92fr] gap-6">
         <div className="space-y-6">
-          <div className="rounded-[28px] border border-white/10 bg-[#101827]/90 p-6 md:p-8 shadow-[0_10px_40px_rgba(0,0,0,0.25)]">
+          <div className="rounded-[28px] border border-white/10 bg-[#182338]/88 p-6 md:p-8 shadow-[0_10px_40px_rgba(0,0,0,0.18)]">
             <h3 className="mb-8 text-xl md:text-2xl font-semibold text-white">Education</h3>
             <div className="space-y-8">
               {education.map((item, index) => (
                 <div key={index} className="grid md:grid-cols-[180px_1fr] gap-3 md:gap-6">
-                  <div className="text-sm text-gray-500 mono-label">{item.period}</div>
+                  <div className="text-sm text-gray-400 mono-label">{item.period}</div>
                   <div>
                     <p className="text-white font-medium text-base md:text-lg">{item.title}</p>
-                    <p className="mt-1 text-gray-400 text-sm md:text-base leading-relaxed">{item.school}</p>
+                    <p className="mt-1 text-gray-300/80 text-sm md:text-base leading-relaxed">{item.school}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="rounded-[28px] border border-white/10 bg-[#101827]/90 p-6 md:p-8 shadow-[0_10px_40px_rgba(0,0,0,0.25)]">
+          <div className="rounded-[28px] border border-white/10 bg-[#182338]/88 p-6 md:p-8 shadow-[0_10px_40px_rgba(0,0,0,0.18)]">
             <h3 className="mb-8 text-xl md:text-2xl font-semibold text-white">Tool stack</h3>
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
               {tools.map((tool) => (
                 <div
                   key={tool.label}
-                  className="rounded-2xl border border-white/8 bg-white/[0.03] p-3 flex flex-col items-center justify-center text-center hover:bg-white/[0.05] transition"
+                  className="rounded-2xl border border-white/8 bg-white/[0.05] p-3 flex flex-col items-center justify-center text-center hover:bg-white/[0.08] transition"
                 >
                   <div
-                    className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${tool.bg} ${tool.ring} border flex items-center justify-center shadow-[0_10px_25px_rgba(0,0,0,0.25)]`}
+                    className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${tool.bg} ${tool.ring} border flex items-center justify-center shadow-[0_10px_25px_rgba(0,0,0,0.18)]`}
                   >
                     <span className={`text-sm font-semibold ${tool.textDark ? "text-black" : "text-white"}`}>
                       {tool.short}
                     </span>
                   </div>
-                  <span className="mt-2 text-[11px] text-white/75">{tool.label}</span>
+                  <span className="mt-2 text-[11px] text-white/85">{tool.label}</span>
                 </div>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="rounded-[28px] border border-white/10 bg-[#101827]/90 p-6 md:p-8 shadow-[0_10px_40px_rgba(0,0,0,0.25)]">
+        <div className="rounded-[28px] border border-white/10 bg-[#182338]/88 p-6 md:p-8 shadow-[0_10px_40px_rgba(0,0,0,0.18)]">
           <p className="mb-4 mono-label text-[#1DB954]">CURRENT VIBE</p>
           <h3 className="text-2xl md:text-3xl font-semibold text-white leading-tight">
             Calm, focused, detail-driven.
           </h3>
-          <p className="mt-4 text-white/70 leading-7">
+          <p className="mt-4 text-white/75 leading-7">
             I like building things that feel clear, useful, and well-structured. In work and in life, I naturally
             lean toward precision, simplicity, and systems that make sense.
           </p>
@@ -525,18 +464,18 @@ function DetailedOrientedSection() {
             {songs.map((song, index) => (
               <div
                 key={index}
-                className="relative overflow-hidden rounded-[24px] border border-white/10 bg-[#0b1220] p-5"
+                className="relative overflow-hidden rounded-[24px] border border-white/10 bg-[#101a2b] p-5"
               >
                 <div className={`pointer-events-none absolute inset-0 bg-gradient-to-r ${song.accent}`} />
                 <div className="relative">
                   <div className="flex items-center gap-4">
-                    <div className="h-16 w-16 rounded-2xl bg-[#1DB954] flex items-center justify-center shadow-[0_12px_28px_rgba(29,185,84,0.25)]">
+                    <div className="h-16 w-16 rounded-2xl bg-[#1DB954] flex items-center justify-center shadow-[0_12px_28px_rgba(29,185,84,0.22)]">
                       <Music2 size={28} className="text-black" />
                     </div>
 
                     <div className="min-w-0 flex-1">
                       <p className="text-white font-semibold text-lg truncate">{song.title}</p>
-                      <p className="text-white/55 text-sm">{song.artist}</p>
+                      <p className="text-white/60 text-sm">{song.artist}</p>
 
                       <div className="mt-3 flex items-center gap-2 text-white/45">
                         <Headphones size={14} />
@@ -558,9 +497,9 @@ function DetailedOrientedSection() {
               </div>
             ))}
 
-            <div className="rounded-[24px] border border-white/10 bg-[#0b1220] p-5">
+            <div className="rounded-[24px] border border-white/10 bg-[#101a2b] p-5">
               <p className="text-xs mono-label text-cyan-300 mb-2">WORK STYLE</p>
-              <p className="text-white/80 text-sm leading-7">
+              <p className="text-white/82 text-sm leading-7">
                 Structured thinking, visual clarity, operational logic, and patience when building something properly.
               </p>
             </div>
@@ -611,11 +550,11 @@ function AboutSection() {
         <PinkAsterisk className="w-5 h-5 md:w-6 md:h-6" />
       </div>
 
-      <div className="overflow-hidden py-6 md:py-8 border-y border-[#1b2435] mb-12 md:mb-16">
+      <div className="overflow-hidden py-6 md:py-8 border-y border-[#28344c] mb-12 md:mb-16">
         <div className="flex animate-marquee whitespace-nowrap">
           {[...Array(4)].map((_, i) => (
             <div key={i} className="flex items-center gap-4 md:gap-8 mx-4 md:mx-8">
-              <span className="text-4xl md:text-8xl font-bold text-gray-800">ABOUT</span>
+              <span className="text-4xl md:text-8xl font-bold text-[#36557d]">ABOUT</span>
               <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
               <span className="text-4xl md:text-8xl font-bold text-white">ME</span>
               <PinkAsterisk className="w-6 h-6 md:w-8 md:h-8" />
@@ -624,16 +563,16 @@ function AboutSection() {
         </div>
 
         <div className="flex flex-wrap gap-8 md:gap-48 mt-4 px-4 md:px-8">
-          <span className="mono-label text-gray-500">BASED IN SWEDEN</span>
-          <span className="mono-label text-gray-500">AQUACULTURE + DIGITAL</span>
-          <span className="mono-label text-gray-500">FIELD-READY</span>
+          <span className="mono-label text-gray-400">BASED IN SWEDEN</span>
+          <span className="mono-label text-gray-400">AQUACULTURE + DIGITAL</span>
+          <span className="mono-label text-gray-400">FIELD-READY</span>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
         <div>
-          <div className="bg-[#101827] rounded-2xl p-6 md:p-8 mb-6 md:mb-8">
-            <p className="text-base md:text-lg leading-relaxed text-white/90">
+          <div className="bg-[#182338] rounded-2xl p-6 md:p-8 mb-6 md:mb-8">
+            <p className="text-base md:text-lg leading-relaxed text-white/92">
               With a strong background in <span className="text-white">aquaculture</span> and hands-on experience in
               marine and farm environments, I combine practical field work with <span className="text-white">web app
               building, digital strategy, monitoring logic, and product structuring</span>. I’ve worked closely with
@@ -643,19 +582,19 @@ function AboutSection() {
             </p>
           </div>
 
-          <div className="bg-[#101827] rounded-2xl p-6 md:p-8">
-            <h4 className="mono-label text-gray-400 mb-6">EXPERIENCE</h4>
+          <div className="bg-[#182338] rounded-2xl p-6 md:p-8">
+            <h4 className="mono-label text-gray-300 mb-6">EXPERIENCE</h4>
 
             <div className="space-y-5 md:space-y-6">
               {experience.map((exp, index) => (
                 <div key={index} className="flex flex-col md:flex-row gap-2 md:gap-8">
-                  <span className="mono-label text-gray-500 whitespace-nowrap text-xs">{exp.period}</span>
+                  <span className="mono-label text-gray-400 whitespace-nowrap text-xs">{exp.period}</span>
 
                   <div>
                     <p className="font-medium text-sm md:text-base text-white">{exp.title}</p>
                     <div className="mt-1">
-                      <p className="text-sm text-gray-400">{exp.company}</p>
-                      <p className="text-xs text-gray-500 leading-relaxed max-w-[56ch] mt-1">
+                      <p className="text-sm text-gray-300">{exp.company}</p>
+                      <p className="text-xs text-gray-400 leading-relaxed max-w-[56ch] mt-1">
                         {exp.note}
                       </p>
                     </div>
@@ -665,8 +604,8 @@ function AboutSection() {
             </div>
 
             <div className="mt-8 border-t border-white/10 pt-6">
-              <h5 className="mono-label text-gray-400 mb-3">AQUACULTURE ACTIVITIES</h5>
-              <ul className="text-sm text-gray-300 leading-relaxed space-y-2 list-disc pl-5">
+              <h5 className="mono-label text-gray-300 mb-3">AQUACULTURE ACTIVITIES</h5>
+              <ul className="text-sm text-gray-200/90 leading-relaxed space-y-2 list-disc pl-5">
                 <li>Daily farm operations: stock monitoring, feeding, and growth observation</li>
                 <li>On-site visits: fish health, behavior, and environmental conditions</li>
                 <li>Harvest support: preparation and assistance during live harvests</li>
@@ -678,7 +617,7 @@ function AboutSection() {
         </div>
 
         <div>
-          <div className="relative h-64 md:h-96 rounded-2xl overflow-hidden mb-6 md:mb-8 bg-black">
+          <div className="relative h-64 md:h-96 rounded-2xl overflow-hidden mb-6 md:mb-8 bg-[#121a28]">
             <Image
               src="/images/about-otmane.png"
               alt="Otmane Joual"
@@ -687,18 +626,18 @@ function AboutSection() {
               sizes="(max-width: 768px) 100vw, 50vw"
               priority={false}
             />
-            <div className="absolute inset-0 bg-black/25" />
+            <div className="absolute inset-0 bg-[#182338]/15" />
             <div
-              className="absolute inset-0 opacity-70"
+              className="absolute inset-0 opacity-80"
               style={{
-                background: "radial-gradient(circle at center, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0) 60%)",
+                background: "radial-gradient(circle at center, rgba(255,255,255,0.10) 0%, rgba(0,0,0,0) 60%)",
               }}
             />
           </div>
 
-          <div className="bg-[#101827] rounded-2xl p-6 md:p-8">
-            <h4 className="mono-label text-gray-400 mb-6">MY BACKGROUND</h4>
-            <div className="space-y-4 text-sm text-gray-300 leading-relaxed">
+          <div className="bg-[#182338] rounded-2xl p-6 md:p-8">
+            <h4 className="mono-label text-gray-300 mb-6">MY BACKGROUND</h4>
+            <div className="space-y-4 text-sm text-gray-200/90 leading-relaxed">
               <p>
                 I move naturally between <span className="text-white">operations</span>,{" "}
                 <span className="text-white">digital systems</span>, and{" "}
@@ -710,7 +649,7 @@ function AboutSection() {
               </p>
             </div>
 
-            <div className="mt-6 text-2xl italic text-gray-600 font-serif">Otmane</div>
+            <div className="mt-6 text-2xl italic text-gray-400 font-serif">Otmane</div>
           </div>
         </div>
       </div>
@@ -720,12 +659,12 @@ function AboutSection() {
 
 function Footer() {
   return (
-    <footer className="px-4 md:px-8 py-12 md:py-16 border-t border-[#1b2435]">
+    <footer className="px-4 md:px-8 py-12 md:py-16 border-t border-[#28344c]">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-end mb-12 md:mb-16">
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="w-10 h-10 rounded-full border border-[#333] flex items-center justify-center hover:bg-[#1f1f1f] transition-colors"
+            className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center hover:bg-white/5 transition-colors"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 19V5M5 12l7-7 7 7" />
@@ -733,22 +672,22 @@ function Footer() {
           </button>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-3 text-sm text-gray-400 border-t border-white/10 pt-8">
+        <div className="grid gap-4 md:grid-cols-3 text-sm text-gray-300 border-t border-white/10 pt-8">
           <div className="space-y-3">
             <p className="text-white font-medium">Otmane Joual</p>
-            <p className="mono-label text-gray-600">DIGITAL · AQUACULTURE · SYSTEMS</p>
+            <p className="mono-label text-gray-400">DIGITAL · AQUACULTURE · SYSTEMS</p>
           </div>
 
           <div className="space-y-3">
             <div className="flex items-start gap-3">
-              <Mail size={16} className="mt-0.5 text-white/70" />
+              <Mail size={16} className="mt-0.5 text-white/80" />
               <a href="mailto:otman.jowal@gmail.com" className="hover:text-white transition-colors">
                 otman.jowal@gmail.com
               </a>
             </div>
 
             <div className="flex items-start gap-3">
-              <Facebook size={16} className="mt-0.5 text-white/70" />
+              <Facebook size={16} className="mt-0.5 text-white/80" />
               <a
                 href="https://www.facebook.com/otman.joual/"
                 target="_blank"
@@ -762,7 +701,7 @@ function Footer() {
 
           <div className="space-y-3">
             <div className="flex items-start gap-3">
-              <MapPin size={16} className="mt-0.5 text-white/70" />
+              <MapPin size={16} className="mt-0.5 text-white/80" />
               <span>Lugna gatan 46 B, 21160 Malmö</span>
             </div>
           </div>
@@ -976,7 +915,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="min-h-screen bg-[#08111b]">
+      <main className="min-h-screen bg-[radial-gradient(circle_at_top,rgba(110,168,255,0.16),transparent_18%),linear-gradient(180deg,#101a2b_0%,#132033_28%,#162235_58%,#101a2b_100%)]">
         <Navigation />
         <Sidebar />
         <HeroIntro />
