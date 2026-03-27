@@ -497,12 +497,7 @@ function DetailedOrientedSection() {
               </div>
             ))}
 
-            <div className="rounded-[24px] border border-white/10 bg-[#101a2b] p-5">
-              <p className="text-xs mono-label text-cyan-300 mb-2">WORK STYLE</p>
-              <p className="text-white/82 text-sm leading-7">
-                Structured thinking, visual clarity, operational logic, and patience when building something properly.
-              </p>
-            </div>
+            
           </div>
         </div>
       </div>
